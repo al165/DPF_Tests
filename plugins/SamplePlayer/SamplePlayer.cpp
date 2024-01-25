@@ -30,7 +30,7 @@ void SamplePlayer::initParameter(uint32_t index, Parameter &parameter)
             parameter.ranges.min = 0.0f;
             parameter.ranges.max = 127.0f;
             parameter.ranges.def = 60.0f;
-            parameter.hints = kParameterIsInteger;
+            parameter.hints = kParameterIsInteger | kParameterIsAutomatable;
             break;
         case kSampleLoaded:
             parameter.name = "Sample Loaded";
@@ -93,7 +93,7 @@ void SamplePlayer::setState(const char *key, const char *value)
     else if(strcmp(key, "filepath") == 0)
     {
         path = std::string(value);
-        // loadSample(path);
+        loadSample(path.c_str());
     }
 };
 
@@ -131,7 +131,7 @@ void SamplePlayer::initState(unsigned int index, String &stateKey, String &defau
 
 int SamplePlayer::loadSample(const char *fp)
 {
-    printf("loadSample %s", fp);
+    printf("loadSample %s\n", fp);
 
     return 0;
 };

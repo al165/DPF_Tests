@@ -1,3 +1,9 @@
 {
-    "cmake.sourceDirectory": "/home/arran/Projects/WAIVE/03_Plugin/DPFTutorial/dpf"
+    "cmake.sourceDirectory": "/home/arran/Projects/WAIVE/03_Plugin/DPFTutorial/dpf",
+    "C_Cpp.default.intelliSenseMode": "gcc-x86",
+    "C_Cpp.autocompleteAddParentheses": true,
+    "C_Cpp.default.cppStandard": "gnu++11",
+    "C_Cpp.default.includePath": [
+        "${workspace_dir}/dpf"
+    ]
 }

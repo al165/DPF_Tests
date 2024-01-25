@@ -17,7 +17,8 @@ FILES_DSP = \
 	SamplePlayer.cpp
 
 FILES_UI = \
-	SamplePlayerUI.cpp
+	SamplePlayerUI.cpp \
+	SimpleButton.cpp
 
 # --------------------------------------------------------------
 # Do some magic
@@ -30,7 +31,7 @@ include ../../dpf/Makefile.plugins.mk
 
 ifeq ($(HAVE_OPENGL),true)
 
-# TARGETS += jack
+TARGETS += jack
 
 ifneq ($(MACOS_OR_WINDOWS),true)
 ifeq ($(HAVE_LIBLO),true)
@@ -38,8 +39,8 @@ ifeq ($(HAVE_LIBLO),true)
 endif # HAVE_LIBLO
 endif # MACOS_OR_WINDOWS
 
-# TARGETS += lv2_sep
-# TARGETS += vst2
+TARGETS += lv2_sep
+TARGETS += vst2
 TARGETS += vst3
 TARGETS += clap
 
