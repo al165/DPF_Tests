@@ -5,7 +5,7 @@
 #
 # Modified by REIS0
 
-PLUGIN=MyAmp
+PLUGIN=SamplePlayer
 
 include dpf/Makefile.base.mk
 
