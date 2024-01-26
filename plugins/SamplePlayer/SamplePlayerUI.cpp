@@ -45,7 +45,7 @@ void SamplePlayerUI::parameterChanged(uint32_t index, float value)
 
 void SamplePlayerUI::onNanoDisplay()
 {
-    printf("onNanoDisplay: fileName = %s\n", fileName);
+    // printf("onNanoDisplay: fileName = %s\n", fileName);
     float width = getWidth();
     float height = getHeight();
 

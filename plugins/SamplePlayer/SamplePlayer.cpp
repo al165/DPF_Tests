@@ -10,6 +10,7 @@ SamplePlayer::SamplePlayer() : Plugin(kParameterCount, 0, 2)
     fMidiNumber = 60;
 
     sampleRate = getSampleRate();
+    samplePtr = 0;
 };
 
 void SamplePlayer::initParameter(uint32_t index, Parameter &parameter)
@@ -133,6 +134,24 @@ int SamplePlayer::loadSample(const char *fp)
 {
     printf("loadSample %s\n", fp);
 
+    SndfileHandle fileHandle(fp);
+
+    int newSampleLength = fileHandle.frames() - 1;
+    
+    if(newSampleLength <= 0){
+        path = "--";
+        return 0;
+    }
+
+    sampleLength = newSampleLength;
+    waveform.resize(0);
+    int channels = fileHandle.channels();
+    waveform.resize(sampleLength * channels);
+    fileHandle.read(&waveform.at(0), sampleLength * channels);
+
+    printf("sampleLength: %d channels: %d\n ", sampleLength, channels);
+    loadedSample = true;
+
     return 0;
 };
 
@@ -145,9 +164,25 @@ void SamplePlayer::run(
     uint32_t midiEventCount      // Number of MIDI events in block
 )
 {
-    std::fill_n(outputs[0], frames, 0.0f);
-    std::fill_n(outputs[1], frames, 0.0f);
-    return;
+    if(!loadedSample)
+    {
+        std::fill_n(outputs[0], frames, 0.0f);
+        std::fill_n(outputs[1], frames, 0.0f);
+        return;
+    }
+
+    float* const outL = outputs[0]; // output ports , stereo
+    float* const outR = outputs[1];
+
+    uint32_t framesDone = 0;
+    while(framesDone < frames)
+    {
+        outL[framesDone] = waveform[samplePtr*2] * fAmp;
+        outR[framesDone] = waveform[samplePtr*2+1] * fAmp;
+
+        framesDone++;
+        samplePtr = (samplePtr + 1) % sampleLength;
+    }
 };
 
 

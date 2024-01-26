@@ -27,6 +27,12 @@ include ../../dpf/Makefile.plugins.mk
 
 
 # --------------------------------------------------------------
+# Extra Flags
+# LINK_FLAGS += --libs=sndfile;
+# BASE_FLAGS += -I.
+LDFLAGS=-lsndfile -L/usr/lib
+
+# --------------------------------------------------------------
 # Enable all possible plugin types
 
 ifeq ($(HAVE_OPENGL),true)

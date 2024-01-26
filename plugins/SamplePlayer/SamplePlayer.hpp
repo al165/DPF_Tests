@@ -4,7 +4,9 @@
 #include "DistrhoPlugin.hpp"
 #include "SamplePlayerParams.h"
 #include <string>
+#include <vector>
 #include <iostream>
+#include <sndfile.hh>
 
 START_NAMESPACE_DISTRHO
 
@@ -76,6 +78,11 @@ private:
 
     std::string path;
     double sampleRate;
+    std::vector<float> waveform;
+    int sampleLength;
+    int samplePtr;
+
+    friend class SamplePlayerUI;
 };
 
 END_NAMESPACE_DISTRHO
