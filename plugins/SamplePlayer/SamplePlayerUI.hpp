@@ -8,6 +8,7 @@
 #include "SamplePlayer.hpp"
 #include "SimpleButton.hpp"
 #include "Knob.hpp"
+#include "HBox.hpp"
 
 
 START_NAMESPACE_DISTRHO
@@ -34,9 +35,12 @@ protected:
 
 private:
     SamplePlayer *plugin;
+    HBox *hbox_controls;
+
     String fileName;
     Button *fButton;
-    Knob *fAmp;
+    Knob *fAmp, *fMidiNumber;
+
 
     DISTRHO_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(SamplePlayerUI);
 };

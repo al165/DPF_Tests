@@ -52,7 +52,6 @@ protected:
         return d_cconst('a', 'r', 'n', 'S');
     }
 
-    // void bufferSizeChanged(uint32_t newBufferSize) override;
 
     // --- Init -------------------
     void initParameter(uint32_t index, Parameter &parameter) override;

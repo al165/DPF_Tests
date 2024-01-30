@@ -8,7 +8,7 @@
 
 START_NAMESPACE_DISTRHO
 
-class Knob : public NanoWidget,
+class Knob : public NanoSubWidget,
              public IdleCallback
 {
 public:

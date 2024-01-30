@@ -19,7 +19,8 @@ FILES_DSP = \
 FILES_UI = \
 	SamplePlayerUI.cpp \
 	widgets/SimpleButton.cpp \
-	widgets/Knob.cpp
+	widgets/Knob.cpp \
+	widgets/HBox.cpp
 
 # --------------------------------------------------------------
 # Do some magic

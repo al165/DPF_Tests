@@ -13,8 +13,9 @@ SamplePlayerUI::SamplePlayerUI()
 
     Window &window = getParentWindow();
 
-    fButton = new Button(this);
-    fButton->setAbsolutePos(10, 10);
+    hbox_controls = new HBox(this);
+
+    fButton = new Button(hbox_controls);
     fButton->setLabel("Open...");
     fButton->setSize(100, 30);
     fButton->setCallback(this);
@@ -23,13 +24,29 @@ SamplePlayerUI::SamplePlayerUI()
     const uint sz = 60;
     const Size<uint> knobSize = Size<uint>(sz, sz);
 
-    fAmp = new Knob(this);
+    fAmp = new Knob(hbox_controls);
     fAmp->setId(kAmp);
     fAmp->setSize(knobSize);
     fAmp->setCallback(this);
     fAmp->gauge_width = 12.0f;
-    fAmp->setAbsolutePos(130, 30);
     fAmp->max = 2.0f;
+
+    fMidiNumber = new Knob(hbox_controls);
+    fMidiNumber->setId(kMidiNote);
+    fMidiNumber->setSize(knobSize);
+    fMidiNumber->setCallback(this);
+    fMidiNumber->gauge_width = 12.0f;
+    fMidiNumber->max = 128.0f;
+
+    hbox_controls->setAbsolutePos(0, 0);
+    hbox_controls->setWidth(UI_W);
+    hbox_controls->padding = 10;
+    hbox_controls->justify_content = HBox::Justify_Content::left;
+    hbox_controls->addWidget(fButton);
+    hbox_controls->addWidget(fAmp);
+    hbox_controls->addWidget(fMidiNumber);
+    hbox_controls->positionWidgets();
+
 
     loadSharedResources();
 }
@@ -48,6 +65,8 @@ void SamplePlayerUI::parameterChanged(uint32_t index, float value)
             repaint();
             break;
         case kMidiNote:
+            fMidiNumber->setValue(value);
+            repaint();
             break;
         case kSampleLoaded:
             break;
