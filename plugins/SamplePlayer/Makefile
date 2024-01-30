@@ -18,7 +18,8 @@ FILES_DSP = \
 
 FILES_UI = \
 	SamplePlayerUI.cpp \
-	SimpleButton.cpp
+	widgets/SimpleButton.cpp \
+	widgets/Knob.cpp
 
 # --------------------------------------------------------------
 # Do some magic
@@ -29,7 +30,7 @@ include ../../dpf/Makefile.plugins.mk
 # --------------------------------------------------------------
 # Extra Flags
 # LINK_FLAGS += --libs=sndfile;
-# BASE_FLAGS += -I.
+BASE_FLAGS += -I. -I./widgets
 LDFLAGS=-lsndfile -L/usr/lib
 
 # --------------------------------------------------------------

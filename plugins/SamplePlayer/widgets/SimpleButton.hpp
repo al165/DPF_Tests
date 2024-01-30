@@ -2,18 +2,25 @@
 #define SIMPLEBUTTON_HPP_INCLUDED
 
 #include "NanoVG.hpp"
-#include "EventHandlers.hpp"
+// #include "EventHandlers.hpp"
 
 #include <string>
 
 START_NAMESPACE_DGL
 
-class Button : public NanoSubWidget,
-               public ButtonEventHandler
+class Button : public NanoSubWidget
 {
 public:
-    explicit Button(Widget* parent, ButtonEventHandler::Callback *cb);
+    class Callback {
+        public:
+            virtual ~Callback() {};
+            virtual void buttonClicked(Button *button) = 0;
+    };  
+    explicit Button(Window &window);
+    explicit Button(Widget* parent);
     ~Button() override;
+
+    void setCallback(Callback *cb);
 
     void setBackgroundColor(Color color);
     void setFontScale(float scale);
@@ -26,6 +33,8 @@ protected:
     bool onMotion(const MotionEvent& ev) override;
 
 private:
+    Callback *callback;
+
     Color backgroundColor;
     Color labelColor;
     std::string label;

@@ -1,22 +1,35 @@
 #include "SamplePlayerUI.hpp"
-#include "SimpleButton.hpp"
 
 
 START_NAMESPACE_DISTRHO
 
 using DGL_NAMESPACE::Color;
-using DGL_NAMESPACE::Button;
-using DGL_NAMESPACE::ButtonEventHandler;
-using DGL_NAMESPACE::SubWidget;
+
 
 SamplePlayerUI::SamplePlayerUI()
-    : UI(UI_W, UI_H),
-      fButton(this, this)
+    : UI(UI_W, UI_H)
 {
     plugin = static_cast<SamplePlayer *>(getPluginInstancePointer());
-    fButton.setAbsolutePos(10, 10);
-    fButton.setLabel("Open...");
-    fButton.setSize(100, 30);
+
+    Window &window = getParentWindow();
+
+    fButton = new Button(this);
+    fButton->setAbsolutePos(10, 10);
+    fButton->setLabel("Open...");
+    fButton->setSize(100, 30);
+    fButton->setCallback(this);
+
+
+    const uint sz = 60;
+    const Size<uint> knobSize = Size<uint>(sz, sz);
+
+    fAmp = new Knob(this);
+    fAmp->setId(kAmp);
+    fAmp->setSize(knobSize);
+    fAmp->setCallback(this);
+    fAmp->gauge_width = 12.0f;
+    fAmp->setAbsolutePos(130, 30);
+    fAmp->max = 2.0f;
 
     loadSharedResources();
 }
@@ -31,6 +44,8 @@ void SamplePlayerUI::parameterChanged(uint32_t index, float value)
     switch(index)
     {
         case kAmp:
+            fAmp->setValue(value);
+            repaint();
             break;
         case kMidiNote:
             break;
@@ -45,7 +60,6 @@ void SamplePlayerUI::parameterChanged(uint32_t index, float value)
 
 void SamplePlayerUI::onNanoDisplay()
 {
-    // printf("onNanoDisplay: fileName = %s\n", fileName);
     float width = getWidth();
     float height = getHeight();
 
@@ -80,10 +94,45 @@ void SamplePlayerUI::stateChanged(const char *key, const char *value)
 }
 
 
-void SamplePlayerUI::buttonClicked(SubWidget* const widget, int) 
+void SamplePlayerUI::buttonClicked(Button *button)
 {
     printf("buttonClicked\n");
     requestStateFile("filepath");
+}
+
+void SamplePlayerUI::knobDragStarted(Knob *knob)
+{
+
+}
+
+void SamplePlayerUI::knobDragFinished(Knob *knob, float value)
+{
+    uint id = knob->getId();
+
+    switch(id)
+    {
+        case kAmp:
+            setParameterValue(kAmp, value);
+            break;
+        default:
+            break;
+    }
+    repaint();
+}
+
+void SamplePlayerUI::knobValueChanged(Knob *knob, float value)
+{
+    uint id = knob->getId();
+
+    switch(id)
+    {
+        case kAmp:
+            setParameterValue(kAmp, value);
+            break;
+        default:
+            break;        
+    }
+    repaint();
 }
 
 

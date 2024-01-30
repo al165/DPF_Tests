@@ -7,6 +7,7 @@
 
 #include "SamplePlayer.hpp"
 #include "SimpleButton.hpp"
+#include "Knob.hpp"
 
 
 START_NAMESPACE_DISTRHO
@@ -14,12 +15,9 @@ START_NAMESPACE_DISTRHO
 constexpr unsigned int UI_W = 1000;
 constexpr unsigned int UI_H = 550;
 
-using DGL_NAMESPACE::Button;
-using DGL_NAMESPACE::ButtonEventHandler;
-using DGL_NAMESPACE::SubWidget;
-
 class SamplePlayerUI : public UI,
-                       public ButtonEventHandler::Callback
+                       public Button::Callback,
+                       public Knob::Callback
 {
 public:
     SamplePlayerUI();
@@ -29,12 +27,16 @@ protected:
     void parameterChanged(uint32_t index, float value) override;
     void stateChanged(const char *key, const char *value) override;
     void onNanoDisplay() override;
-    void buttonClicked(SubWidget* const widget, int) override;
+    void buttonClicked(Button *button) override;
+    void knobDragStarted(Knob *knob) override;
+    void knobDragFinished(Knob *knob, float value) override;
+    void knobValueChanged(Knob *knob, float value) override;
 
 private:
     SamplePlayer *plugin;
     String fileName;
-    Button fButton;
+    Button *fButton;
+    Knob *fAmp;
 
     DISTRHO_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(SamplePlayerUI);
 };

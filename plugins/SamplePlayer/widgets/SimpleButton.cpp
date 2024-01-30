@@ -3,9 +3,8 @@
 
 START_NAMESPACE_DGL
 
-Button::Button(Widget* const parent, ButtonEventHandler::Callback* const cb)
-    : NanoSubWidget(parent),
-      ButtonEventHandler(this),
+Button::Button(Widget* parent)
+    : NanoWidget(parent),
       backgroundColor(32, 32, 32),
       labelColor(255, 255, 255),
       label("button"),
@@ -16,7 +15,20 @@ Button::Button(Widget* const parent, ButtonEventHandler::Callback* const cb)
 #else
     loadSharedResources();
 #endif
-    ButtonEventHandler::setCallback(cb);
+}
+
+Button::Button(Window &parent)
+    : NanoWidget(parent),
+      backgroundColor(32, 32, 32),
+      labelColor(255, 255, 255),
+      label("button"),
+      fontScale(1.0f)
+{
+#ifdef DGL_NO_SHARED_RESOURCES
+    createFontFromFile("sans", "/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf");
+#else
+    loadSharedResources();
+#endif
 }
 
 Button::~Button()
@@ -75,12 +87,24 @@ void Button::onNanoDisplay()
 
 bool Button::onMouse(const MouseEvent& ev)
 {
-    return ButtonEventHandler::mouseEvent(ev);
+    if(contains(ev.pos) && ev.press && ev.button == 1)
+    {
+        callback->buttonClicked(this);
+        return true;
+    }
+
+    return false;
 }
 
 bool Button::onMotion(const MotionEvent& ev)
 {
-    return ButtonEventHandler::motionEvent(ev);
+    // return ButtonEventHandler::motionEvent(ev);
+    return true;
+}
+
+void Button::setCallback(Callback *cb)
+{
+    callback = cb;
 }
 
 
