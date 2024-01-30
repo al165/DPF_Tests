@@ -133,6 +133,9 @@ void SamplePlayerUI::knobDragFinished(Knob *knob, float value)
         case kAmp:
             setParameterValue(kAmp, value);
             break;
+        case kMidiNote:
+            setParameterValue(kMidiNote, value);
+            break;
         default:
             break;
     }
@@ -147,6 +150,9 @@ void SamplePlayerUI::knobValueChanged(Knob *knob, float value)
     {
         case kAmp:
             setParameterValue(kAmp, value);
+            break;
+        case kMidiNote:
+            setParameterValue(kMidiNote, value);
             break;
         default:
             break;        
