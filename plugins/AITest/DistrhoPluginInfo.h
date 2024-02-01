@@ -4,14 +4,15 @@
 #define DISTRHO_PLUGIN_URI "https://github.com/arnlyn/aitest"
 #define DISTRHO_PLUGIN_BRAND "arnlyn tests"
 #define DISTRHO_PLUGIN_NAME  "AITest"
-#define DISTRHO_PLUGIN_CLAP_ID "studio.kx.distrho.instrument"
+#define DISTRHO_PLUGIN_CLAP_ID "arnlyn.test.midiinstrument"
 
-#define DISTRHO_PLUGIN_IS_SYNTH     1
+#define HAVE_OPENGL 1
 #define DISTRHO_PLUGIN_HAS_UI       1
 #define DISTRHO_UI_USE_NANOVG       1
 #define DISTRHO_PLUGIN_IS_RT_SAFE   1
 #define DISTRHO_PLUGIN_NUM_INPUTS   0
-#define DISTRHO_PLUGIN_NUM_OUTPUTS  2
+#define DISTRHO_PLUGIN_NUM_OUTPUTS  0
+#define DISTRHO_PLUGIN_WANT_MIDI_INPUT  1
 #define DISTRHO_PLUGIN_WANT_MIDI_OUTPUT 1
 #define DISTRHO_PLUGIN_WANT_TIMEPOS 1
 #define DISTRHO_PLUGIN_WANT_STATE   0

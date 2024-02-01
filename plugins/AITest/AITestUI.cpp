@@ -7,7 +7,20 @@ using DGL_NAMESPACE::Color;
 AITestUI::AITestUI()
     : UI(UI_W, UI_H)
 {
-    plugin = static_cast<AITest *>(getPluginInstancePointer());
+    // plugin = static_cast<AITest *>(getPluginInstancePointer());
+
+    Window &window = getWindow();
+
+    hbox_controls = new HBox(this);
+
+    fGenerate = new Button(hbox_controls);
+    fGenerate->setLabel("generate");
+    fGenerate->setSize(100, 30);
+    fGenerate->setAbsolutePos(20, 20);
+    fGenerate->setCallback(this);
+    fGenerate->setId(kGenerate);
+
+    loadSharedResources();
 }
 
 AITestUI::~AITestUI()
@@ -44,6 +57,7 @@ void AITestUI::onNanoDisplay()
 void AITestUI::buttonClicked(Button *button)
 {
     printf("buttonClicked!\n");
+    setParameterValue(kGenerate, 1.0f);
 }
 
 UI *createUI()

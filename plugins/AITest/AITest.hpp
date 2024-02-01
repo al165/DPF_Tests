@@ -67,6 +67,8 @@ protected:
 private:
     torch::jit::script::Module module;
 
+    void generateNew();
+
     friend class AITestUI;
 
 };

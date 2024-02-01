@@ -4,21 +4,7 @@
 START_NAMESPACE_DGL
 
 Button::Button(Widget* parent)
-    : NanoWidget(parent),
-      backgroundColor(32, 32, 32),
-      labelColor(255, 255, 255),
-      label("button"),
-      fontScale(1.0f)
-{
-#ifdef DGL_NO_SHARED_RESOURCES
-    createFontFromFile("sans", "/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf");
-#else
-    loadSharedResources();
-#endif
-}
-
-Button::Button(Window &parent)
-    : NanoWidget(parent),
+    : NanoSubWidget(parent),
       backgroundColor(32, 32, 32),
       labelColor(255, 255, 255),
       label("button"),

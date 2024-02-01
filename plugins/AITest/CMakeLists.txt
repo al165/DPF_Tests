@@ -1,5 +1,9 @@
-dpf_add_plugin(AITest
-  TARGETS jack lv2 vst2
+dpf_add_plugin(
+  AITest
+  TARGETS 
+      jack 
+      lv2 
+      vst2
   FILES_DSP
       AITest.cpp
   FILES_UI
@@ -13,4 +17,6 @@ target_include_directories(
   PUBLIC 
     .
     widgets
+    "../../dpf/distrho"
+    "../../dpf/dgl"
 )

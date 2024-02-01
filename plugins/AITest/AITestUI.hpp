@@ -31,11 +31,11 @@ protected:
 
 private:
     AITest *plugin;
+    HBox *hbox_controls;
     Button *fGenerate;
 
     DISTRHO_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AITestUI);
 };
 
 END_NAMESPACE_DISTRHO
-
 #endif

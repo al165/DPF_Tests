@@ -11,7 +11,6 @@ START_NAMESPACE_DISTRHO
 class HBox : public NanoSubWidget
 {
 public:
-    explicit HBox(Window &parent) noexcept;
     explicit HBox(Widget *widget) noexcept;
     enum struct Align_Items
     {

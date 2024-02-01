@@ -20,7 +20,6 @@ public:
             virtual void knobValueChanged(Knob *knob, float value) = 0;
     };
 
-    explicit Knob(Window &parent) noexcept;
     explicit Knob(Widget *widget) noexcept;
 
     void setCallback(Callback *cb);

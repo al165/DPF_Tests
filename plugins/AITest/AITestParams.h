@@ -1,3 +1,4 @@
 enum Parameters {
-    kParameterCount = 0
+    kGenerate,
+    kParameterCount
 };

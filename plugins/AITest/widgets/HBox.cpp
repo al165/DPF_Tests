@@ -2,17 +2,9 @@
 
 START_NAMESPACE_DISTRHO
 
-HBox::HBox(Window &parent) noexcept
-    : NanoWidget(parent),
-      align_items(Align_Items::middle),
-      justify_content(Justify_Content::space_evenly),
-      padding(0)
-{
-    setWidth(parent.getWidth());
-}
 
 HBox::HBox(Widget *widget) noexcept
-    : NanoWidget(widget),
+    : NanoSubWidget(widget),
       align_items(Align_Items::middle),
       justify_content(Justify_Content::space_evenly),
       padding(0)

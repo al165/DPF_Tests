@@ -16,7 +16,6 @@ public:
             virtual ~Callback() {};
             virtual void buttonClicked(Button *button) = 0;
     };  
-    explicit Button(Window &window);
     explicit Button(Widget* parent);
     ~Button() override;
 

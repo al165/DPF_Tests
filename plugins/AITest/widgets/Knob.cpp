@@ -4,24 +4,9 @@ START_NAMESPACE_DISTRHO
 
 using DGL_NAMESPACE::Color;
 
-Knob::Knob(Window &parent) noexcept
-    : NanoWidget(parent)
-{
-    loadSharedResources();
-    parent.addIdleCallback(this);
-
-    dragging_ = false;
-    value_ = 0.0f;
-    tmp_value_ = 0.0f;
-    min = 0.0f;
-    max = 1.0f;
-    foreground_color = Color(255, 255, 255);
-    background_color = Color(0, 0, 0);
-    gauge_width = 6.0f;
-}
 
 Knob::Knob(Widget *parent) noexcept
-    : NanoWidget(parent)
+    : NanoSubWidget(parent)
 {
     loadSharedResources();
     parent->getWindow().addIdleCallback(this);

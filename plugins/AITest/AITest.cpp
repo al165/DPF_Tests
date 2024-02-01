@@ -4,10 +4,8 @@
 
 START_NAMESPACE_DISTRHO
 
-AITest::AITest() : Plugin(0, 0, 0)
+AITest::AITest() : Plugin(kParameterCount, 0, 0)
 {
-    torch::Tensor tensor = torch::eye(3);
-    std::cout << tensor << std::endl;
 
     try {
         module = torch::jit::load("/home/arran/Projects/WAIVE/03_Plugin/DPFTutorial/models/beat_model_test.zip");
@@ -51,6 +49,9 @@ void AITest::setParameterValue(uint32_t index, float value)
 {
     switch(index)
     {
+        case kGenerate:
+            generateNew();
+            break;
         default:
             break;
     }
@@ -87,6 +88,16 @@ void AITest::run(
 {
 
 };
+
+
+void AITest::generateNew(){
+    std::vector<torch::jit::IValue> inputs;
+    inputs.push_back(torch::randn({24}));
+
+    at::Tensor output = module.forward(inputs).toTensor();
+    std::cout << output << "\n";
+}
+
 
 Plugin *createPlugin()
 {
