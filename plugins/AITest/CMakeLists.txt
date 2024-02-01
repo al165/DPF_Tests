@@ -1,0 +1,16 @@
+dpf_add_plugin(AITest
+  TARGETS jack lv2 vst2
+  FILES_DSP
+      AITest.cpp
+  FILES_UI
+      AITestUI.cpp
+      widgets/HBox.cpp
+      widgets/Knob.cpp
+      widgets/SimpleButton.cpp)
+
+target_include_directories(
+  AITest 
+  PUBLIC 
+    .
+    widgets
+)
