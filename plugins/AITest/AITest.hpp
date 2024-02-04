@@ -52,9 +52,9 @@ protected:
     }
 
     void initParameter(uint32_t index, Parameter &parameter) override;
-    // void setState(const char *key, const char *value) override;
-    // String getState(const char *key) const override;
-    // void initState(unsigned int, String &, String &) override;
+    void setState(const char *key, const char *value) override;
+    String getState(const char *key) const override;
+    void initState(unsigned int, String &, String &) override;
 
     // --- Internal data ----------
     float getParameterValue(uint32_t index) const override;
@@ -65,10 +65,20 @@ protected:
     void run(const float **, float **, uint32_t, const MidiEvent *midiEvents, uint32_t midiEventCount) override;
 
 private:
+    bool has_model_;
+    float fThreshold, fSixteenth;
+
     torch::jit::script::Module module;
+    at::Tensor output;
+
+    uint8_t pattern[3][16];
 
     void generateNew();
+    void updatePattern();
 
+    int sixteenthProcessed = -1; // the last 16th note processed;
+
+    // AITestUI ui;
     friend class AITestUI;
 
 };

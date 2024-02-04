@@ -3,20 +3,20 @@ dpf_add_plugin(
   TARGETS 
       jack 
       lv2 
-      vst2
+      vst3
   FILES_DSP
       AITest.cpp
   FILES_UI
       AITestUI.cpp
       widgets/HBox.cpp
       widgets/Knob.cpp
-      widgets/SimpleButton.cpp)
+      widgets/SimpleButton.cpp
+      widgets/BeatGrid.cpp
+)
 
 target_include_directories(
   AITest 
   PUBLIC 
     .
     widgets
-    "../../dpf/distrho"
-    "../../dpf/dgl"
 )

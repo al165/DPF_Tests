@@ -229,18 +229,18 @@ lv2_ttl_generator/fast:
 .PHONY : lv2_ttl_generator/fast
 
 # Convenience name for target.
-plugins/AITest/CMakeFiles/AITest-vst2.dir/rule:
-	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 plugins/AITest/CMakeFiles/AITest-vst2.dir/rule
-.PHONY : plugins/AITest/CMakeFiles/AITest-vst2.dir/rule
+plugins/AITest/CMakeFiles/AITest-vst3.dir/rule:
+	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 plugins/AITest/CMakeFiles/AITest-vst3.dir/rule
+.PHONY : plugins/AITest/CMakeFiles/AITest-vst3.dir/rule
 
 # Convenience name for target.
-AITest-vst2: plugins/AITest/CMakeFiles/AITest-vst2.dir/rule
-.PHONY : AITest-vst2
+AITest-vst3: plugins/AITest/CMakeFiles/AITest-vst3.dir/rule
+.PHONY : AITest-vst3
 
 # fast build rule for target.
-AITest-vst2/fast:
-	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-vst2.dir/build.make plugins/AITest/CMakeFiles/AITest-vst2.dir/build
-.PHONY : AITest-vst2/fast
+AITest-vst3/fast:
+	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-vst3.dir/build.make plugins/AITest/CMakeFiles/AITest-vst3.dir/build
+.PHONY : AITest-vst3/fast
 
 AITest.o: AITest.cpp.o
 .PHONY : AITest.o
@@ -777,7 +777,7 @@ __/__/dpf/distrho/DistrhoPluginMain.o: __/__/dpf/distrho/DistrhoPluginMain.cpp.o
 __/__/dpf/distrho/DistrhoPluginMain.cpp.o:
 	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-jack.dir/build.make plugins/AITest/CMakeFiles/AITest-jack.dir/__/__/dpf/distrho/DistrhoPluginMain.cpp.o
 	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-lv2.dir/build.make plugins/AITest/CMakeFiles/AITest-lv2.dir/__/__/dpf/distrho/DistrhoPluginMain.cpp.o
-	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-vst2.dir/build.make plugins/AITest/CMakeFiles/AITest-vst2.dir/__/__/dpf/distrho/DistrhoPluginMain.cpp.o
+	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-vst3.dir/build.make plugins/AITest/CMakeFiles/AITest-vst3.dir/__/__/dpf/distrho/DistrhoPluginMain.cpp.o
 .PHONY : __/__/dpf/distrho/DistrhoPluginMain.cpp.o
 
 __/__/dpf/distrho/DistrhoPluginMain.i: __/__/dpf/distrho/DistrhoPluginMain.cpp.i
@@ -787,7 +787,7 @@ __/__/dpf/distrho/DistrhoPluginMain.i: __/__/dpf/distrho/DistrhoPluginMain.cpp.i
 __/__/dpf/distrho/DistrhoPluginMain.cpp.i:
 	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-jack.dir/build.make plugins/AITest/CMakeFiles/AITest-jack.dir/__/__/dpf/distrho/DistrhoPluginMain.cpp.i
 	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-lv2.dir/build.make plugins/AITest/CMakeFiles/AITest-lv2.dir/__/__/dpf/distrho/DistrhoPluginMain.cpp.i
-	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-vst2.dir/build.make plugins/AITest/CMakeFiles/AITest-vst2.dir/__/__/dpf/distrho/DistrhoPluginMain.cpp.i
+	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-vst3.dir/build.make plugins/AITest/CMakeFiles/AITest-vst3.dir/__/__/dpf/distrho/DistrhoPluginMain.cpp.i
 .PHONY : __/__/dpf/distrho/DistrhoPluginMain.cpp.i
 
 __/__/dpf/distrho/DistrhoPluginMain.s: __/__/dpf/distrho/DistrhoPluginMain.cpp.s
@@ -797,7 +797,7 @@ __/__/dpf/distrho/DistrhoPluginMain.s: __/__/dpf/distrho/DistrhoPluginMain.cpp.s
 __/__/dpf/distrho/DistrhoPluginMain.cpp.s:
 	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-jack.dir/build.make plugins/AITest/CMakeFiles/AITest-jack.dir/__/__/dpf/distrho/DistrhoPluginMain.cpp.s
 	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-lv2.dir/build.make plugins/AITest/CMakeFiles/AITest-lv2.dir/__/__/dpf/distrho/DistrhoPluginMain.cpp.s
-	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-vst2.dir/build.make plugins/AITest/CMakeFiles/AITest-vst2.dir/__/__/dpf/distrho/DistrhoPluginMain.cpp.s
+	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-vst3.dir/build.make plugins/AITest/CMakeFiles/AITest-vst3.dir/__/__/dpf/distrho/DistrhoPluginMain.cpp.s
 .PHONY : __/__/dpf/distrho/DistrhoPluginMain.cpp.s
 
 __/__/dpf/distrho/DistrhoUIMain.o: __/__/dpf/distrho/DistrhoUIMain.cpp.o
@@ -807,7 +807,7 @@ __/__/dpf/distrho/DistrhoUIMain.o: __/__/dpf/distrho/DistrhoUIMain.cpp.o
 __/__/dpf/distrho/DistrhoUIMain.cpp.o:
 	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-jack.dir/build.make plugins/AITest/CMakeFiles/AITest-jack.dir/__/__/dpf/distrho/DistrhoUIMain.cpp.o
 	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-lv2-ui.dir/build.make plugins/AITest/CMakeFiles/AITest-lv2-ui.dir/__/__/dpf/distrho/DistrhoUIMain.cpp.o
-	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-vst2.dir/build.make plugins/AITest/CMakeFiles/AITest-vst2.dir/__/__/dpf/distrho/DistrhoUIMain.cpp.o
+	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-vst3.dir/build.make plugins/AITest/CMakeFiles/AITest-vst3.dir/__/__/dpf/distrho/DistrhoUIMain.cpp.o
 .PHONY : __/__/dpf/distrho/DistrhoUIMain.cpp.o
 
 __/__/dpf/distrho/DistrhoUIMain.i: __/__/dpf/distrho/DistrhoUIMain.cpp.i
@@ -817,7 +817,7 @@ __/__/dpf/distrho/DistrhoUIMain.i: __/__/dpf/distrho/DistrhoUIMain.cpp.i
 __/__/dpf/distrho/DistrhoUIMain.cpp.i:
 	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-jack.dir/build.make plugins/AITest/CMakeFiles/AITest-jack.dir/__/__/dpf/distrho/DistrhoUIMain.cpp.i
 	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-lv2-ui.dir/build.make plugins/AITest/CMakeFiles/AITest-lv2-ui.dir/__/__/dpf/distrho/DistrhoUIMain.cpp.i
-	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-vst2.dir/build.make plugins/AITest/CMakeFiles/AITest-vst2.dir/__/__/dpf/distrho/DistrhoUIMain.cpp.i
+	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-vst3.dir/build.make plugins/AITest/CMakeFiles/AITest-vst3.dir/__/__/dpf/distrho/DistrhoUIMain.cpp.i
 .PHONY : __/__/dpf/distrho/DistrhoUIMain.cpp.i
 
 __/__/dpf/distrho/DistrhoUIMain.s: __/__/dpf/distrho/DistrhoUIMain.cpp.s
@@ -827,7 +827,7 @@ __/__/dpf/distrho/DistrhoUIMain.s: __/__/dpf/distrho/DistrhoUIMain.cpp.s
 __/__/dpf/distrho/DistrhoUIMain.cpp.s:
 	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-jack.dir/build.make plugins/AITest/CMakeFiles/AITest-jack.dir/__/__/dpf/distrho/DistrhoUIMain.cpp.s
 	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-lv2-ui.dir/build.make plugins/AITest/CMakeFiles/AITest-lv2-ui.dir/__/__/dpf/distrho/DistrhoUIMain.cpp.s
-	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-vst2.dir/build.make plugins/AITest/CMakeFiles/AITest-vst2.dir/__/__/dpf/distrho/DistrhoUIMain.cpp.s
+	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-vst3.dir/build.make plugins/AITest/CMakeFiles/AITest-vst3.dir/__/__/dpf/distrho/DistrhoUIMain.cpp.s
 .PHONY : __/__/dpf/distrho/DistrhoUIMain.cpp.s
 
 __/__/dpf/utils/lv2-ttl-generator/lv2_ttl_generator.o: __/__/dpf/utils/lv2-ttl-generator/lv2_ttl_generator.c.o
@@ -877,6 +877,30 @@ _dpf_empty.s: _dpf_empty.c.s
 _dpf_empty.c.s:
 	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest.dir/build.make plugins/AITest/CMakeFiles/AITest.dir/_dpf_empty.c.s
 .PHONY : _dpf_empty.c.s
+
+widgets/BeatGrid.o: widgets/BeatGrid.cpp.o
+.PHONY : widgets/BeatGrid.o
+
+# target to build an object file
+widgets/BeatGrid.cpp.o:
+	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-ui.dir/build.make plugins/AITest/CMakeFiles/AITest-ui.dir/widgets/BeatGrid.cpp.o
+.PHONY : widgets/BeatGrid.cpp.o
+
+widgets/BeatGrid.i: widgets/BeatGrid.cpp.i
+.PHONY : widgets/BeatGrid.i
+
+# target to preprocess a source file
+widgets/BeatGrid.cpp.i:
+	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-ui.dir/build.make plugins/AITest/CMakeFiles/AITest-ui.dir/widgets/BeatGrid.cpp.i
+.PHONY : widgets/BeatGrid.cpp.i
+
+widgets/BeatGrid.s: widgets/BeatGrid.cpp.s
+.PHONY : widgets/BeatGrid.s
+
+# target to generate assembly for a file
+widgets/BeatGrid.cpp.s:
+	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-ui.dir/build.make plugins/AITest/CMakeFiles/AITest-ui.dir/widgets/BeatGrid.cpp.s
+.PHONY : widgets/BeatGrid.cpp.s
 
 widgets/HBox.o: widgets/HBox.cpp.o
 .PHONY : widgets/HBox.o
@@ -964,7 +988,7 @@ help:
 	@echo "... AITest-lv2"
 	@echo "... AITest-lv2-ui"
 	@echo "... AITest-ui"
-	@echo "... AITest-vst2"
+	@echo "... AITest-vst3"
 	@echo "... dgl-opengl"
 	@echo "... lv2_ttl_generator"
 	@echo "... AITest.o"
@@ -1045,6 +1069,9 @@ help:
 	@echo "... _dpf_empty.o"
 	@echo "... _dpf_empty.i"
 	@echo "... _dpf_empty.s"
+	@echo "... widgets/BeatGrid.o"
+	@echo "... widgets/BeatGrid.i"
+	@echo "... widgets/BeatGrid.s"
 	@echo "... widgets/HBox.o"
 	@echo "... widgets/HBox.i"
 	@echo "... widgets/HBox.s"

@@ -221,17 +221,17 @@ lv2_ttl_generator/fast:
 .PHONY : lv2_ttl_generator/fast
 
 #=============================================================================
-# Target rules for targets named AITest-vst2
+# Target rules for targets named AITest-vst3
 
 # Build rule for target.
-AITest-vst2: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 AITest-vst2
-.PHONY : AITest-vst2
+AITest-vst3: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 AITest-vst3
+.PHONY : AITest-vst3
 
 # fast build rule for target.
-AITest-vst2/fast:
-	$(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-vst2.dir/build.make plugins/AITest/CMakeFiles/AITest-vst2.dir/build
-.PHONY : AITest-vst2/fast
+AITest-vst3/fast:
+	$(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-vst3.dir/build.make plugins/AITest/CMakeFiles/AITest-vst3.dir/build
+.PHONY : AITest-vst3/fast
 
 # Help Target
 help:
@@ -247,7 +247,7 @@ help:
 	@echo "... AITest-lv2"
 	@echo "... AITest-lv2-ui"
 	@echo "... AITest-ui"
-	@echo "... AITest-vst2"
+	@echo "... AITest-vst3"
 	@echo "... dgl-opengl"
 	@echo "... lv2_ttl_generator"
 .PHONY : help
