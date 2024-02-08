@@ -11,6 +11,8 @@
 #include "HBox.hpp"
 #include "BeatGrid.hpp"
 
+#include "font.cpp"
+
 
 START_NAMESPACE_DISTRHO
 
@@ -41,6 +43,8 @@ private:
     Button *fGenerate;
     Knob *fThreshold;
     BeatGrid *fBeatGrid;
+
+    FontId _logo_font;
 
     DISTRHO_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AITestUI);
 };

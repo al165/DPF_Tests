@@ -43,6 +43,9 @@ AITestUI::AITestUI()
     fBeatGrid->pattern = &plugin->pattern;
 
     setGeometryConstraints(UI_W, UI_H, true, true);
+
+    _logo_font = createFontFromMemory("VG5000", VG5000_ttf, VG5000_ttf_len, false);
+    fontFaceId(_logo_font);
 }
 
 AITestUI::~AITestUI()
@@ -93,7 +96,15 @@ void AITestUI::onNanoDisplay()
     fillColor(Color(40, 40, 40));
     fontSize(12);
     textAlign(Align::ALIGN_RIGHT);
-    text(width-10, height-10, build_date, NULL);
+    text(width-10, height-10, build_date, nullptr);
+    closePath();
+
+    beginPath();
+    fillColor(Color(40, 40, 40));
+    fontSize(32);
+    textAlign(Align::ALIGN_RIGHT | Align::ALIGN_TOP);
+    fontFaceId(_logo_font);
+    text(width-10, 10, "waive", nullptr);
     closePath();
 }
 

@@ -14,6 +14,7 @@ dpf_add_plugin(
       widgets/Knob.cpp
       widgets/SimpleButton.cpp
       widgets/BeatGrid.cpp
+      font.cpp
 )
 
 target_include_directories(

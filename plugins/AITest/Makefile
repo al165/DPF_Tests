@@ -898,6 +898,30 @@ _dpf_empty.c.s:
 	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest.dir/build.make plugins/AITest/CMakeFiles/AITest.dir/_dpf_empty.c.s
 .PHONY : _dpf_empty.c.s
 
+font.o: font.cpp.o
+.PHONY : font.o
+
+# target to build an object file
+font.cpp.o:
+	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-ui.dir/build.make plugins/AITest/CMakeFiles/AITest-ui.dir/font.cpp.o
+.PHONY : font.cpp.o
+
+font.i: font.cpp.i
+.PHONY : font.i
+
+# target to preprocess a source file
+font.cpp.i:
+	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-ui.dir/build.make plugins/AITest/CMakeFiles/AITest-ui.dir/font.cpp.i
+.PHONY : font.cpp.i
+
+font.s: font.cpp.s
+.PHONY : font.s
+
+# target to generate assembly for a file
+font.cpp.s:
+	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-ui.dir/build.make plugins/AITest/CMakeFiles/AITest-ui.dir/font.cpp.s
+.PHONY : font.cpp.s
+
 widgets/BeatGrid.o: widgets/BeatGrid.cpp.o
 .PHONY : widgets/BeatGrid.o
 
@@ -1090,6 +1114,9 @@ help:
 	@echo "... _dpf_empty.o"
 	@echo "... _dpf_empty.i"
 	@echo "... _dpf_empty.s"
+	@echo "... font.o"
+	@echo "... font.i"
+	@echo "... font.s"
 	@echo "... widgets/BeatGrid.o"
 	@echo "... widgets/BeatGrid.i"
 	@echo "... widgets/BeatGrid.s"
