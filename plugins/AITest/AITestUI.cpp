@@ -11,6 +11,8 @@ AITestUI::AITestUI()
 
     Window &window = getWindow();
 
+    _logo_font = createFontFromMemory("VG5000", VG5000_ttf, VG5000_ttf_len, false);
+
     hbox_controls = new HBox(this);
 
     fGenerate = new Button(hbox_controls);
@@ -37,6 +39,7 @@ AITestUI::AITestUI()
     fBeatGrid = new BeatGrid(this);
     fBeatGrid->setSize(Size<uint>(UI_W - 20, 80));
     fBeatGrid->setAbsolutePos(10, 80);
+    fBeatGrid->_font = _logo_font;
 
     loadSharedResources();
 
@@ -44,8 +47,6 @@ AITestUI::AITestUI()
 
     setGeometryConstraints(UI_W, UI_H, true, true);
 
-    _logo_font = createFontFromMemory("VG5000", VG5000_ttf, VG5000_ttf_len, false);
-    fontFaceId(_logo_font);
 }
 
 AITestUI::~AITestUI()
@@ -118,12 +119,7 @@ void AITestUI::buttonClicked(Button *button)
 
 void AITestUI::knobDragStarted(Knob *knob){}
 
-void AITestUI::knobDragFinished(Knob *knob, float value)
-{
-    // uint id = knob->getId();
-    // setParameterValue(id, value);
-    // repaint();
-}
+void AITestUI::knobDragFinished(Knob *knob, float value){}
 
 void AITestUI::knobValueChanged(Knob *knob, float value)
 {

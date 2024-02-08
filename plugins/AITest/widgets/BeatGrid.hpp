@@ -25,6 +25,17 @@ private:
     uint8_t (*pattern)[3][16];
     uint8_t sixteenth;
 
+    DGL::Color cellBackground;
+    DGL::Color cellBorder;
+    DGL::Color triggerBackground;
+    DGL::Color triggerForeground;
+    DGL::Color triggerHighlightBackground;
+    DGL::Color triggerHighlightForeground;
+
+    FontId _font;
+
+    const char* channelNames[5] = {"kick", "snare", "hihat", "clap", "tom"};
+
     DISTRHO_LEAK_DETECTOR(BeatGrid);
 
     friend class AITestUI;

@@ -1,3 +1,6 @@
+#ifndef AITESTPARAMS_HPP_INCLUDED
+#define AITESTPARAMS_HPP_INCLUDED
+
 enum Parameters {
     kGenerate,
     kThreshold,
@@ -14,3 +17,5 @@ enum MidiDrumNotes {
 };
 
 const uint8_t MidiMap[5] = {KD, SD, HH, CL, TH};
+
+#endif
