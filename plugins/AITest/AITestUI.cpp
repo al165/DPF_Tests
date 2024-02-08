@@ -113,7 +113,8 @@ void AITestUI::onNanoDisplay()
 
 void AITestUI::buttonClicked(Button *button)
 {
-    setParameterValue(kGenerate, 1.0f);
+    // setParameterValue(kGenerate, 1.0f);
+    plugin->generateNew();
     repaint();
 }
 
