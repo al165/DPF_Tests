@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include <torch/script.h>
+#include <model.cpp>
 
 START_NAMESPACE_DISTRHO
 
@@ -81,7 +82,6 @@ private:
     int sixteenthProcessed; // the last 16th note processed;
     int triggered[3] = {0, 0, 0};
 
-    // AITestUI ui;
     friend class AITestUI;
 
 };

@@ -6,8 +6,14 @@ AITest::AITest() : Plugin(kParameterCount, 0, 1),
     fThreshold(0.7)
 {
 
+    std::stringstream model_stream;
+    model_stream.write((char *) beat_model_test_zip, beat_model_test_zip_len);
+
     try {
-        module = torch::jit::load("/home/arran/Projects/WAIVE/03_Plugin/DPFTutorial/models/beat_model_test.zip");
+        // std::istream model_stream;
+
+        // module = torch::jit::load("/home/arran/Projects/WAIVE/03_Plugin/DPFTutorial/models/beat_model_test.zip");
+        module = torch::jit::load(model_stream);
         has_model_ = true;
 
     } catch (const c10::Error& e) {
@@ -155,7 +161,7 @@ void AITest::run(
         MidiEvent me;
         me.size = 3;
         me.frame = 0;
-        
+
         for(uint32_t i=0; i<3; i++)
         {
             if(triggered[i])
