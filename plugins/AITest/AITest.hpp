@@ -62,11 +62,13 @@ protected:
 
     // --- Process ----------------
     // void activate() override;
-    void run(const float **, float **, uint32_t, const MidiEvent *midiEvents, uint32_t midiEventCount) override;
+    void run(const float **, float **, uint32_t numFrames, const MidiEvent *midiEvents, uint32_t midiEventCount) override;
+    void sampleRateChanged(double newSampleRate) override;
 
 private:
     bool has_model_;
     float fThreshold, fSixteenth;
+    double sampleRate;
 
     torch::jit::script::Module module;
     at::Tensor output;
@@ -76,7 +78,8 @@ private:
     void generateNew();
     void updatePattern();
 
-    int sixteenthProcessed = -1; // the last 16th note processed;
+    int sixteenthProcessed; // the last 16th note processed;
+    int triggered[3] = {0, 0, 0};
 
     // AITestUI ui;
     friend class AITestUI;

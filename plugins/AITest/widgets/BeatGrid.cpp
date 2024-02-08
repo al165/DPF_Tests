@@ -39,7 +39,7 @@ void BeatGrid::onNanoDisplay()
             beginPath();
             strokeColor(highlight);
             fillColor(Color(c, c, c));
-            rect(j*cw, i*ch, cw-1, ch-1);
+            rect(j*cw, (2-i)*ch, cw-1, ch-1);
             fill();
             stroke();
             closePath();

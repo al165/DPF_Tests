@@ -1,9 +1,11 @@
 dpf_add_plugin(
   AITest
   TARGETS 
-      jack 
+      # jack
       lv2 
       vst3
+      vst2
+      clap
   FILES_DSP
       AITest.cpp
   FILES_UI

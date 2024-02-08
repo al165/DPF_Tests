@@ -1,7 +1,5 @@
 #include "AITest.hpp"
 
-
-
 START_NAMESPACE_DISTRHO
 
 AITest::AITest() : Plugin(kParameterCount, 0, 1),
@@ -18,6 +16,8 @@ AITest::AITest() : Plugin(kParameterCount, 0, 1),
     }
 
     fSixteenth = 0.0f;
+    sixteenthProcessed = 0;
+    sampleRate = getSampleRate();
     generateNew();
 };
 
@@ -45,7 +45,7 @@ void AITest::initParameter(uint32_t index, Parameter &parameter)
             parameter.ranges.min = 0.0f;
             parameter.ranges.max = 16.0f;
             parameter.ranges.def = 0.0f;
-            parameter.hints = kParameterIsOutput | kParameterIsInteger | kParameterIsAutomatable;
+            parameter.hints = kParameterIsOutput | kParameterIsInteger;
             break;
         default:
             break;
@@ -72,7 +72,7 @@ float AITest::getParameterValue(uint32_t index) const
 
 void AITest::setParameterValue(uint32_t index, float value)
 {
-    printf("AITest::setParameterValue: %d %.2f\n", index, value);
+    // printf("AITest::setParameterValue: %d %.2f\n", index, value);
     switch(index)
     {
         case kGenerate:
@@ -128,38 +128,101 @@ void AITest::initState(unsigned int index, String &stateKey, String &defaultStat
 void AITest::run(
     const float **,              // incoming audio
     float **,                    // outgoing audio
-    uint32_t,                    // size of block to process
+    uint32_t numFrames,          // size of block to process
     const MidiEvent *midiEvents, // MIDI pointer
     uint32_t midiEventCount      // Number of MIDI events in block
 )
 {
     const TimePosition& timePos(getTimePosition());
 
-    if (timePos.bbt.valid)
-    {
-        float tick = timePos.bbt.tick;
-        float beat = timePos.bbt.beat - 1.0f;
-        float tpb = timePos.bbt.ticksPerBeat;
 
-        fSixteenth = (beat + (tick / tpb)) * 4.0f;
-    } else {
+    for(uint32_t i=0; i<midiEventCount; ++i) 
+    {
+        MidiEvent me = midiEvents[i];
+        writeMidiEvent(me);
+        printf("MidiEvent: size %d frame %d data %08b %08b %08b\n", me.size, me.frame, me.data[0], me.data[1], me.data[2]);
+    }
+
+    static bool wasPlaying = false;
+    static uint32_t loopFrame = 0;
+
+    if(!timePos.playing && wasPlaying)
+    {
         fSixteenth = 0.0f;
+        sixteenthProcessed = 0;
+        triggered[0] = 0;
+        triggered[1] = 0;
+        triggered[2] = 0;
+        loopFrame = 0;
     }
 
-    for (uint32_t i=0; i<midiEventCount; ++i) 
+    wasPlaying = timePos.playing;
+
+    if(!timePos.playing) return;
+
+    if(!timePos.bbt.valid)
     {
-        writeMidiEvent(midiEvents[i]);
-
-        if((int) fSixteenth != sixteenthProcessed)
-        {
-            sixteenthProcessed = (int) fSixteenth;
-
-            if(pattern[0][sixteenthProcessed])
-            {
-                
-            }
-        }
+        fSixteenth = 0.0f;
+        sixteenthProcessed = 0;
+        triggered[0] = 0;
+        triggered[1] = 0;
+        triggered[2] = 0;
+        loopFrame = 0;
+        return;
     }
+
+    float tick = timePos.bbt.tick;
+    float beat = timePos.bbt.beat - 1.0f;
+    float tpb = timePos.bbt.ticksPerBeat;
+
+    double samplesPerBeat = (60.0 * sampleRate) / timePos.bbt.beatsPerMinute;
+    double samplesPerBar = samplesPerBeat * 4.0;
+    double samplesPer16th = samplesPerBeat * 0.25;
+    double samplesPerTick = samplesPerBeat / tpb;
+    loopFrame = (int) (samplesPerTick * tick);
+
+    fSixteenth = (beat + (tick / tpb)) * 4.0f;
+    // sixteenthProcessed = (int) fSixteenth;
+
+    for(uint32_t s = 0; s < numFrames; s++)
+    {
+        if(loopFrame % (int) samplesPer16th == 0)
+        {
+            MidiEvent me;
+            me.size = 3;
+            me.frame = s;
+            
+            for(uint32_t i=0; i<3; i++)
+            {
+                if(triggered[i])
+                {
+                    triggered[i] = 0;
+                    // MIDI NoteOff
+                    me.data[0] = 0x80;
+                    me.data[1] = MidiMap[i];
+                    me.data[2] = 0;
+
+                    writeMidiEvent(me);
+                }
+
+                if(pattern[i][sixteenthProcessed] > 0)
+                {
+                    triggered[i] = 1;
+
+                    me.data[0] = 0x90;
+                    me.data[1] = MidiMap[i];
+                    me.data[2] = pattern[i][sixteenthProcessed];
+
+                    writeMidiEvent(me);
+                }
+            }
+
+            sixteenthProcessed = (sixteenthProcessed + 1) % 16;
+        }
+
+        loopFrame = (loopFrame+1) % (int) samplesPerBar;
+    }
+
 };
 
 
@@ -184,9 +247,13 @@ void AITest::updatePattern(){
             char c = 128 * (val > fThreshold ? val : 0.0f);
 
             pattern[i][j] = c;
-
         }
     }
+}
+
+void AITest::sampleRateChanged(double newSampleRate)
+{
+    sampleRate = newSampleRate;
 }
 
 

@@ -41,6 +41,8 @@ AITestUI::AITestUI()
     loadSharedResources();
 
     fBeatGrid->pattern = &plugin->pattern;
+
+    setGeometryConstraints(UI_W, UI_H, true, true);
 }
 
 AITestUI::~AITestUI()
@@ -50,7 +52,7 @@ AITestUI::~AITestUI()
 
 void AITestUI::parameterChanged(uint32_t index, float value)
 {
-    printf("AITest::parameterChanged: %d %.2f\n", index, value);
+    // printf("AITestUI::parameterChanged: %d %.2f\n", index, value);
     switch(index)
     {   
         case kThreshold:
@@ -83,13 +85,22 @@ void AITestUI::onNanoDisplay()
     rect(0.0f, 0.0f, width, height);
     fill();
     closePath();
+
+    char build_date[80];
+    sprintf(build_date, "Build: %s %s", __DATE__, __TIME__);
+
+    beginPath();
+    fillColor(Color(40, 40, 40));
+    fontSize(12);
+    textAlign(Align::ALIGN_RIGHT);
+    text(width-10, height-10, build_date, NULL);
+    closePath();
 }
 
 
 
 void AITestUI::buttonClicked(Button *button)
 {
-    printf("buttonClicked!\n");
     setParameterValue(kGenerate, 1.0f);
     repaint();
 }

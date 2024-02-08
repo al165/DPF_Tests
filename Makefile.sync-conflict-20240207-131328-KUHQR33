@@ -169,6 +169,19 @@ AITest-ui/fast:
 .PHONY : AITest-ui/fast
 
 #=============================================================================
+# Target rules for targets named AITest-jack
+
+# Build rule for target.
+AITest-jack: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 AITest-jack
+.PHONY : AITest-jack
+
+# fast build rule for target.
+AITest-jack/fast:
+	$(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-jack.dir/build.make plugins/AITest/CMakeFiles/AITest-jack.dir/build
+.PHONY : AITest-jack/fast
+
+#=============================================================================
 # Target rules for targets named AITest-lv2
 
 # Build rule for target.
@@ -220,32 +233,6 @@ AITest-vst3/fast:
 	$(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-vst3.dir/build.make plugins/AITest/CMakeFiles/AITest-vst3.dir/build
 .PHONY : AITest-vst3/fast
 
-#=============================================================================
-# Target rules for targets named AITest-vst2
-
-# Build rule for target.
-AITest-vst2: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 AITest-vst2
-.PHONY : AITest-vst2
-
-# fast build rule for target.
-AITest-vst2/fast:
-	$(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-vst2.dir/build.make plugins/AITest/CMakeFiles/AITest-vst2.dir/build
-.PHONY : AITest-vst2/fast
-
-#=============================================================================
-# Target rules for targets named AITest-clap
-
-# Build rule for target.
-AITest-clap: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 AITest-clap
-.PHONY : AITest-clap
-
-# fast build rule for target.
-AITest-clap/fast:
-	$(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-clap.dir/build.make plugins/AITest/CMakeFiles/AITest-clap.dir/build
-.PHONY : AITest-clap/fast
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -255,12 +242,11 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... AITest"
-	@echo "... AITest-clap"
 	@echo "... AITest-dsp"
+	@echo "... AITest-jack"
 	@echo "... AITest-lv2"
 	@echo "... AITest-lv2-ui"
 	@echo "... AITest-ui"
-	@echo "... AITest-vst2"
 	@echo "... AITest-vst3"
 	@echo "... dgl-opengl"
 	@echo "... lv2_ttl_generator"

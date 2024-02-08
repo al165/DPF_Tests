@@ -6,9 +6,11 @@ enum Parameters {
 };
 
 enum MidiDrumNotes {
-    KD = 36,
-    SD = 38,
-    HH = 42,
-    CL = 39,
-    TH = 43
+    KD = 0x24,  // 36
+    SD = 0x26,  // 38
+    HH = 0x2A,  // 42
+    CL = 0x27,  // 39
+    TH = 0x2B   // 43
 };
+
+const uint8_t MidiMap[5] = {KD, SD, HH, CL, TH};
