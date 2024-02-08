@@ -150,10 +150,25 @@ void AITest::run(
     {
         fSixteenth = 0.0f;
         sixteenthProcessed = 0;
-        triggered[0] = 0;
-        triggered[1] = 0;
-        triggered[2] = 0;
         loopFrame = 0;
+
+        MidiEvent me;
+        me.size = 3;
+        me.frame = 0;
+        
+        for(uint32_t i=0; i<3; i++)
+        {
+            if(triggered[i])
+            {
+                triggered[i] = 0;
+                // MIDI NoteOff
+                me.data[0] = 0x80;
+                me.data[1] = MidiMap[i];
+                me.data[2] = 0;
+
+                writeMidiEvent(me);
+            }
+        }
     }
 
     wasPlaying = timePos.playing;
