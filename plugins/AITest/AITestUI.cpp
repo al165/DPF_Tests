@@ -52,7 +52,6 @@ AITestUI::~AITestUI(){}
 
 void AITestUI::parameterChanged(uint32_t index, float value)
 {
-    // printf("AITestUI::parameterChanged: %d %.2f\n", index, value);
     switch(index)
     {   
         case kThreshold:
@@ -64,6 +63,7 @@ void AITestUI::parameterChanged(uint32_t index, float value)
             fBeatGrid->repaint();
             break;
         default:
+            repaint();
             break;
     }
 }

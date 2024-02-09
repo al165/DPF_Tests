@@ -8,6 +8,7 @@
 
 #include <torch/script.h>
 #include <beat_model_5x16.cpp>
+#include <grid_embedder_2d.cpp>
 
 #define INS 5
 #define GS 16
@@ -71,22 +72,24 @@ protected:
 
 private:
     bool has_model_;
-    float fThreshold, fSixteenth;
+    float fThreshold, fEmbedX, fEmbedY, fSixteenth;
     double sampleRate;
 
-    torch::jit::script::Module module;
-    at::Tensor output;
+    torch::jit::script::Module beat_model;
+    torch::jit::script::Module grid_embedding_2d_model;
+    at::Tensor gridOutput;
+    torch::Tensor embedding;
 
     uint8_t pattern[INS][GS];
 
     void generateNew();
+    void generateFromEmbedding();
     void updatePattern();
 
     int sixteenthProcessed; // the last 16th note processed;
     int triggered[INS] = {0};
 
     friend class AITestUI;
-
 };
 
 

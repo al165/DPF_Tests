@@ -4,6 +4,8 @@
 enum Parameters {
     kThreshold,
     kSixteenth,
+    kEmbedX,
+    kEmbedY,
     kParameterCount
 };
 

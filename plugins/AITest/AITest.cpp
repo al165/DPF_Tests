@@ -3,14 +3,21 @@
 START_NAMESPACE_DISTRHO
 
 AITest::AITest() : Plugin(kParameterCount, 0, 1),
-    fThreshold(0.7)
+    fThreshold(0.7),
+    fEmbedX(0.0),
+    fEmbedY(0.0)
 {
 
     std::stringstream model_stream;
-    model_stream.write((char *) beat_model_5x16_zip, beat_model_5x16_zip_len);
 
     try {
-        module = torch::jit::load(model_stream);
+        model_stream.write((char *) beat_model_5x16_zip, beat_model_5x16_zip_len);
+        beat_model = torch::jit::load(model_stream);
+
+        model_stream.str("");
+        model_stream.write((char *) grid_embedder_2d_model_zip, grid_embedder_2d_model_zip_len);
+        grid_embedding_2d_model = torch::jit::load(model_stream);
+
         has_model_ = true;
 
     } catch (const c10::Error& e) {
@@ -39,12 +46,26 @@ void AITest::initParameter(uint32_t index, Parameter &parameter)
             break;
         case kSixteenth:
             parameter.name = "Sixteenth";
-            parameter.name = "sixteenth";
+            parameter.symbol = "sixteenth";
             parameter.ranges.min = 0.0f;
             parameter.ranges.max = 16.0f;
             parameter.ranges.def = 0.0f;
             parameter.hints = kParameterIsOutput | kParameterIsInteger;
             break;
+        case kEmbedX:
+            parameter.name = "MapX";
+            parameter.symbol = "map_x";
+            parameter.ranges.min = -8.0f;
+            parameter.ranges.max = 5.0f;
+            parameter.ranges.def = 0.0f;
+            parameter.hints = kParameterIsAutomatable;
+        case kEmbedY:
+            parameter.name = "MapY";
+            parameter.symbol = "map_y";
+            parameter.ranges.min = -2.5f;
+            parameter.ranges.max = 5.0f;
+            parameter.ranges.def = 0.0f;
+            parameter.hints = kParameterIsAutomatable;
         default:
             break;
     }
@@ -61,6 +82,11 @@ float AITest::getParameterValue(uint32_t index) const
         case kSixteenth:
             val = fSixteenth;
             break;
+        case kEmbedX:
+            val = fEmbedX;
+            break;
+        case kEmbedY:
+            val = fEmbedY;
         default:
             break;
     }
@@ -75,6 +101,14 @@ void AITest::setParameterValue(uint32_t index, float value)
         case kThreshold:
             fThreshold = value;
             updatePattern();
+            break;
+        case kEmbedX:
+            fEmbedX = value;
+            generateFromEmbedding();
+            break;
+        case kEmbedY:
+            fEmbedY = value;
+            generateFromEmbedding();
             break;
         default:
             break;
@@ -98,14 +132,12 @@ void AITest::setState(const char *key, const char *value)
 
 String AITest::getState(const char *key) const
 {
-    printf("getState()\n");
     String retString = String("undefined state");
     return retString;
 }
 
 void AITest::initState(unsigned int index, String &stateKey, String &defaultStateValue)
 {
-    printf(" == initState\n");
     switch(index)
     {
         case 0:
@@ -191,7 +223,6 @@ void AITest::run(
     loopFrame = (int) (samplesPerTick * tick);
 
     fSixteenth = (beat + (tick / tpb)) * 4.0f;
-    // sixteenthProcessed = (int) fSixteenth;
 
     for(uint32_t s = 0; s < numFrames; s++)
     {
@@ -238,11 +269,26 @@ void AITest::run(
 void AITest::generateNew(){
     if(!has_model_) return;
 
-    std::vector<torch::jit::IValue> inputs;
-    inputs.push_back(torch::randn({24}));
+    // TODO: make random fEmbedX and Y
 
-    output = module.forward(inputs).toTensor().reshape({INS, GS});
-    std::cout << output << "\n";
+    generateFromEmbedding();
+}
+
+void AITest::generateFromEmbedding(){
+    if(!has_model_) return;
+
+    std::vector<torch::jit::IValue> inputs;
+    inputs.push_back(torch::tensor({fEmbedX, fEmbedY}));
+
+    std::cout << "2d inputs:\n" << inputs << "\n";
+
+    embedding = grid_embedding_2d_model.forward(inputs).toTensor();
+
+    std::vector<torch::jit::IValue> Z;
+    Z.push_back(embedding);
+
+    gridOutput = beat_model.forward(Z).toTensor().reshape({INS, GS});
+    std::cout << gridOutput << "\n";
 
     updatePattern();
 }
@@ -252,7 +298,7 @@ void AITest::updatePattern(){
     {
         for(int j=0; j<GS; j++)
         {
-            float val = std::min(1.0f, std::max(0.0f, output.index({i, j}).item<float>()));
+            float val = std::min(1.0f, std::max(0.0f, gridOutput.index({i, j}).item<float>()));
             char c = 128 * (val > fThreshold ? val : 0.0f);
 
             pattern[i][j] = c;
