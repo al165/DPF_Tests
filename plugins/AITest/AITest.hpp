@@ -7,7 +7,10 @@
 #include <iostream>
 
 #include <torch/script.h>
-#include <model.cpp>
+#include <beat_model_5x16.cpp>
+
+#define INS 5
+#define GS 16
 
 START_NAMESPACE_DISTRHO
 
@@ -74,13 +77,13 @@ private:
     torch::jit::script::Module module;
     at::Tensor output;
 
-    uint8_t pattern[3][16];
+    uint8_t pattern[INS][GS];
 
     void generateNew();
     void updatePattern();
 
     int sixteenthProcessed; // the last 16th note processed;
-    int triggered[3] = {0, 0, 0};
+    int triggered[INS] = {0};
 
     friend class AITestUI;
 

@@ -6,6 +6,8 @@
 #include "NanoVG.hpp"
 #include <iostream>
 
+#include "AITest.hpp"
+
 
 START_NAMESPACE_DISTRHO
 
@@ -22,7 +24,7 @@ protected:
     bool onScroll(const ScrollEvent &) override;
 
 private:
-    uint8_t (*pattern)[3][16];
+    uint8_t (*pattern)[INS][GS];
     uint8_t sixteenth;
 
     DGL::Color cellBackground;

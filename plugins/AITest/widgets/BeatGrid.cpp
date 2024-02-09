@@ -29,19 +29,21 @@ void BeatGrid::onNanoDisplay()
     const float width = getWidth();
     const float height = getHeight();
 
-    const float cw = (width - 80.0f)/16.0f;
-    const float ch = height/3.0f;
+    const float cw = (width - 80.0f)/(float)GS;
+    const float ch = height/(float)INS;
+
     
-    for(int i = 0; i < 3; i++)
+    for(int i = 0; i < INS; i++)
     {
         beginPath();
         fillColor(Color(40, 40, 40));
         fontFaceId(_font);
+        fontSize(18);
         textAlign(Align::ALIGN_RIGHT | Align::ALIGN_MIDDLE);
-        text(70.0f, (2.5-i)*ch, channelNames[i], nullptr);
+        text(70.0f, (INS - 0.5 -i)*ch, channelNames[i], nullptr);
         closePath();
 
-        for(int j = 0; j < 16; j++)
+        for(int j = 0; j < GS; j++)
         {
             float v = (float)(*pattern)[i][j]/128.0f;
             Color *bg = &cellBackground;
@@ -58,7 +60,7 @@ void BeatGrid::onNanoDisplay()
             beginPath();
             strokeColor(cellBorder);
             fillColor(*bg);
-            rect(80.0f + j*cw, (2-i)*ch, cw-1, ch-1);
+            rect(80.0f + j*cw, (INS - 1 - i)*ch, cw-1, ch-1);
             fill();
             stroke();
             closePath();
@@ -67,7 +69,7 @@ void BeatGrid::onNanoDisplay()
             {
                 beginPath();
                 fillColor(*fg);
-                rect(80.0f + j*cw, (2.0f-i)*ch + (1.0f-v)*ch, cw-2, ch*v);
+                rect(80.0f + j*cw, (INS - 1 -i)*ch + (1.0f-v)*ch, cw-2, ch*v);
                 fill();
                 closePath();
             }

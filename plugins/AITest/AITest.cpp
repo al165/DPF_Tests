@@ -7,7 +7,7 @@ AITest::AITest() : Plugin(kParameterCount, 0, 1),
 {
 
     std::stringstream model_stream;
-    model_stream.write((char *) beat_model_test_zip, beat_model_test_zip_len);
+    model_stream.write((char *) beat_model_5x16_zip, beat_model_5x16_zip_len);
 
     try {
         module = torch::jit::load(model_stream);
@@ -86,9 +86,9 @@ void AITest::setState(const char *key, const char *value)
 {
     if (std::strcmp(key, "beat_grid") == 0)
     {
-        for(int i=0; i<3; i++)
+        for(int i=0; i<INS; i++)
         {
-            for(int j=0; j<16; j++)
+            for(int j=0; j<GS; j++)
             {
                 pattern[i][j] = value[i*16+j];
             }
@@ -150,7 +150,7 @@ void AITest::run(
         me.size = 3;
         me.frame = 0;
 
-        for(uint32_t i=0; i<3; i++)
+        for(uint32_t i=0; i<INS; i++)
         {
             if(triggered[i])
             {
@@ -201,7 +201,7 @@ void AITest::run(
             me.size = 3;
             me.frame = s;
             
-            for(uint32_t i=0; i<3; i++)
+            for(uint32_t i=0; i<INS; i++)
             {
                 if(triggered[i])
                 {
@@ -241,16 +241,16 @@ void AITest::generateNew(){
     std::vector<torch::jit::IValue> inputs;
     inputs.push_back(torch::randn({24}));
 
-    output = module.forward(inputs).toTensor().reshape({3, 16});
+    output = module.forward(inputs).toTensor().reshape({INS, GS});
     std::cout << output << "\n";
 
     updatePattern();
 }
 
 void AITest::updatePattern(){
-    for(int i=0; i<3; i++)
+    for(int i=0; i<INS; i++)
     {
-        for(int j=0; j<16; j++)
+        for(int j=0; j<GS; j++)
         {
             float val = std::min(1.0f, std::max(0.0f, output.index({i, j}).item<float>()));
             char c = 128 * (val > fThreshold ? val : 0.0f);

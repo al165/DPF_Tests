@@ -17,7 +17,7 @@
 START_NAMESPACE_DISTRHO
 
 constexpr unsigned int UI_W = 600;
-constexpr unsigned int UI_H = 200;
+constexpr unsigned int UI_H = 300;
 
 class AITestUI : public UI,
                  public Button::Callback,

@@ -22,4 +22,5 @@ target_include_directories(
   PUBLIC 
     .
     widgets
+    models
 )

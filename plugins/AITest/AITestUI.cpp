@@ -36,7 +36,7 @@ AITestUI::AITestUI()
     hbox_controls->positionWidgets();
 
     fBeatGrid = new BeatGrid(this);
-    fBeatGrid->setSize(Size<uint>(UI_W - 20, 80));
+    fBeatGrid->setSize(Size<uint>(UI_W - 20, 160));
     fBeatGrid->setAbsolutePos(10, 80);
     fBeatGrid->_font = _logo_font;
 
