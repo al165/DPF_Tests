@@ -7,7 +7,7 @@
 
 #include "AITest.hpp"
 #include "SimpleButton.hpp"
-#include "Knob.hpp"
+#include "VSlider.hpp"
 #include "HBox.hpp"
 #include "BeatGrid.hpp"
 #include "XYSlider.hpp"
@@ -17,12 +17,12 @@
 
 START_NAMESPACE_DISTRHO
 
-constexpr unsigned int UI_W = 600;
-constexpr unsigned int UI_H = 300;
+constexpr unsigned int UI_W = 800;
+constexpr unsigned int UI_H = 280;
 
 class AITestUI : public UI,
                  public Button::Callback,
-                 public Knob::Callback,
+                 public VSlider::Callback,
                  public XYSlider::Callback
 {
 public:
@@ -34,9 +34,9 @@ protected:
     void stateChanged(const char *key, const char *value) override;
     void onNanoDisplay() override;
     void buttonClicked(Button *button) override;
-    void knobDragStarted(Knob *knob) override;
-    void knobDragFinished(Knob *knob, float value) override;
-    void knobValueChanged(Knob *knob, float value) override;
+    void vSliderDragStarted(VSlider *vSlider) override;
+    void vSliderDragFinished(VSlider *vSlider, float value) override;
+    void vSliderValueChanged(VSlider *vSlider, float value) override;
     void xyDragStarted(XYSlider *xySlider) override;
     void xyDragFinished(XYSlider *xySlider, float x, float y) override;
     void xyValueChanged(XYSlider *xySlider, float x, float y) override;
@@ -46,7 +46,7 @@ private:
     AITest *plugin;
     HBox *hbox_controls;
     Button *fGenerate;
-    Knob *fThreshold;
+    VSlider *fThreshold;
     BeatGrid *fBeatGrid;
     XYSlider *fXYSlider;
 

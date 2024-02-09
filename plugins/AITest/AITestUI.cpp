@@ -15,22 +15,28 @@ AITestUI::AITestUI()
 
     hbox_controls = new HBox(this);
 
-    fGenerate = new Button(hbox_controls);
-    fGenerate->setLabel("generate");
-    fGenerate->setSize(100, 30);
-    fGenerate->setCallback(this);
+    // fGenerate = new Button(hbox_controls);
+    // fGenerate->setLabel("generate");
+    // fGenerate->setSize(100, 30);
+    // fGenerate->setCallback(this);
 
-    fThreshold = new Knob(hbox_controls);
+    fBeatGrid = new BeatGrid(hbox_controls);
+    fBeatGrid->setSize(Size<uint>(570, 160));
+    fBeatGrid->setAbsolutePos(10, 110);
+    fBeatGrid->_font = _logo_font;
+
+    fThreshold = new VSlider(hbox_controls);
     fThreshold->setId(kThreshold);
-    fThreshold->setSize(Size<uint>(50, 50));
+    fThreshold->setSize(Size<uint>(20, 160));
     fThreshold->setCallback(this);
     fThreshold->gauge_width = 12.0f;
     fThreshold->max = 1.0f;
     fThreshold->foreground_color = Color(51, 51, 51);
     fThreshold->background_color = Color(255, 255, 255);
+    fThreshold->marker_color = Color(0, 0, 0);
 
     fXYSlider = new XYSlider(hbox_controls);
-    fXYSlider->setSize(Size<uint>(80, 80));
+    fXYSlider->setSize(Size<uint>(160, 160));
     fXYSlider->setCallback(this);
     fXYSlider->minX = -8.0f;
     fXYSlider->maxX = 5.0f;
@@ -40,20 +46,16 @@ AITestUI::AITestUI()
     fXYSlider->fg_color = Color(51, 51, 51);
     fXYSlider->marker_color = Color(0, 0, 0);
 
-
-    hbox_controls->setAbsolutePos(10, 10);
+    hbox_controls->setAbsolutePos(10, 50);
     hbox_controls->setWidth(UI_W);
     hbox_controls->padding = 10;
     hbox_controls->justify_content = HBox::Justify_Content::left;
-    hbox_controls->addWidget(fGenerate);
-    hbox_controls->addWidget(fThreshold);
+    // hbox_controls->addWidget(fGenerate);
     hbox_controls->addWidget(fXYSlider);
+    hbox_controls->addWidget(fBeatGrid);
+    hbox_controls->addWidget(fThreshold);
     hbox_controls->positionWidgets();
 
-    fBeatGrid = new BeatGrid(this);
-    fBeatGrid->setSize(Size<uint>(UI_W - 20, 160));
-    fBeatGrid->setAbsolutePos(10, 110);
-    fBeatGrid->_font = _logo_font;
 
     loadSharedResources();
 
@@ -138,13 +140,13 @@ void AITestUI::buttonClicked(Button *button)
     }
 }
 
-void AITestUI::knobDragStarted(Knob *knob){}
+void AITestUI::vSliderDragStarted(VSlider *vSlider){}
 
-void AITestUI::knobDragFinished(Knob *knob, float value){}
+void AITestUI::vSliderDragFinished(VSlider *vSlider, float value){}
 
-void AITestUI::knobValueChanged(Knob *knob, float value)
+void AITestUI::vSliderValueChanged(VSlider *vSlider, float value)
 {
-    if(knob == fThreshold){
+    if(vSlider == fThreshold){
         setParameterValue(kThreshold, value);
     }
 }

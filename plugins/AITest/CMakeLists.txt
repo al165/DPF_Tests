@@ -15,6 +15,7 @@ dpf_add_plugin(
       widgets/SimpleButton.cpp
       widgets/BeatGrid.cpp
       widgets/XYSlider.cpp
+      widgets/VSlider.cpp
       font.cpp
 )
 
