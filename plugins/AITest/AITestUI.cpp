@@ -26,6 +26,20 @@ AITestUI::AITestUI()
     fThreshold->setCallback(this);
     fThreshold->gauge_width = 12.0f;
     fThreshold->max = 1.0f;
+    fThreshold->foreground_color = Color(51, 51, 51);
+    fThreshold->background_color = Color(255, 255, 255);
+
+    fXYSlider = new XYSlider(hbox_controls);
+    fXYSlider->setSize(Size<uint>(80, 80));
+    fXYSlider->setCallback(this);
+    fXYSlider->minX = -8.0f;
+    fXYSlider->maxX = 5.0f;
+    fXYSlider->minY = -2.5f;
+    fXYSlider->maxY = 5.0f;
+    fXYSlider->bg_color = Color(255, 255, 255);
+    fXYSlider->fg_color = Color(51, 51, 51);
+    fXYSlider->marker_color = Color(0, 0, 0);
+
 
     hbox_controls->setAbsolutePos(10, 10);
     hbox_controls->setWidth(UI_W);
@@ -33,11 +47,12 @@ AITestUI::AITestUI()
     hbox_controls->justify_content = HBox::Justify_Content::left;
     hbox_controls->addWidget(fGenerate);
     hbox_controls->addWidget(fThreshold);
+    hbox_controls->addWidget(fXYSlider);
     hbox_controls->positionWidgets();
 
     fBeatGrid = new BeatGrid(this);
     fBeatGrid->setSize(Size<uint>(UI_W - 20, 160));
-    fBeatGrid->setAbsolutePos(10, 80);
+    fBeatGrid->setAbsolutePos(10, 110);
     fBeatGrid->_font = _logo_font;
 
     loadSharedResources();
@@ -45,7 +60,6 @@ AITestUI::AITestUI()
     fBeatGrid->pattern = &plugin->pattern;
 
     setGeometryConstraints(UI_W, UI_H, true, true);
-
 }
 
 AITestUI::~AITestUI(){}
@@ -62,6 +76,14 @@ void AITestUI::parameterChanged(uint32_t index, float value)
             fBeatGrid->sixteenth = (uint8_t)value;
             fBeatGrid->repaint();
             break;
+        case kEmbedX:
+            fXYSlider->setXValue(value);
+            fXYSlider->repaint();
+            break;
+        case kEmbedY:
+            fXYSlider->setYValue(value);
+            fXYSlider->repaint();
+            break;  
         default:
             repaint();
             break;
@@ -122,8 +144,19 @@ void AITestUI::knobDragFinished(Knob *knob, float value){}
 
 void AITestUI::knobValueChanged(Knob *knob, float value)
 {
-    uint id = knob->getId();
-    setParameterValue(id, value);
+    if(knob == fThreshold){
+        setParameterValue(kThreshold, value);
+    }
+}
+
+void AITestUI::xyDragStarted(XYSlider *xySlider){}
+
+void AITestUI::xyDragFinished(XYSlider *xySlider, float x, float y){}
+
+void AITestUI::xyValueChanged(XYSlider *xySlider, float x, float y)
+{
+    setParameterValue(kEmbedX, x);
+    setParameterValue(kEmbedY, y);
     repaint();
 }
 

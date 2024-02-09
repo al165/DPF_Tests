@@ -53,19 +53,21 @@ void AITest::initParameter(uint32_t index, Parameter &parameter)
             parameter.hints = kParameterIsOutput | kParameterIsInteger;
             break;
         case kEmbedX:
-            parameter.name = "MapX";
+            parameter.name = "Map X";
             parameter.symbol = "map_x";
             parameter.ranges.min = -8.0f;
             parameter.ranges.max = 5.0f;
             parameter.ranges.def = 0.0f;
             parameter.hints = kParameterIsAutomatable;
+            break;
         case kEmbedY:
-            parameter.name = "MapY";
+            parameter.name = "Map Y";
             parameter.symbol = "map_y";
             parameter.ranges.min = -2.5f;
             parameter.ranges.max = 5.0f;
             parameter.ranges.def = 0.0f;
             parameter.hints = kParameterIsAutomatable;
+            break;
         default:
             break;
     }
@@ -141,7 +143,7 @@ void AITest::initState(unsigned int index, String &stateKey, String &defaultStat
     switch(index)
     {
         case 0:
-            printf(" init beat_grid\n");
+            // printf(" init beat_grid\n");
             stateKey = "beat_grid";
             defaultStateValue = "";
             break;
@@ -166,7 +168,7 @@ void AITest::run(
     {
         MidiEvent me = midiEvents[i];
         writeMidiEvent(me);
-        printf("MidiEvent: size %d frame %d data %08b %08b %08b\n", me.size, me.frame, me.data[0], me.data[1], me.data[2]);
+        // printf("MidiEvent: size %d frame %d data %08b %08b %08b\n", me.size, me.frame, me.data[0], me.data[1], me.data[2]);
     }
 
     static bool wasPlaying = false;
@@ -280,7 +282,7 @@ void AITest::generateFromEmbedding(){
     std::vector<torch::jit::IValue> inputs;
     inputs.push_back(torch::tensor({fEmbedX, fEmbedY}));
 
-    std::cout << "2d inputs:\n" << inputs << "\n";
+    // std::cout << "2d inputs:\n" << inputs << "\n";
 
     embedding = grid_embedding_2d_model.forward(inputs).toTensor();
 
@@ -288,7 +290,7 @@ void AITest::generateFromEmbedding(){
     Z.push_back(embedding);
 
     gridOutput = beat_model.forward(Z).toTensor().reshape({INS, GS});
-    std::cout << gridOutput << "\n";
+    // std::cout << gridOutput << "\n";
 
     updatePattern();
 }
@@ -299,7 +301,7 @@ void AITest::updatePattern(){
         for(int j=0; j<GS; j++)
         {
             float val = std::min(1.0f, std::max(0.0f, gridOutput.index({i, j}).item<float>()));
-            char c = 128 * (val > fThreshold ? val : 0.0f);
+            char c = 128 * (val > (1.0f-fThreshold) ? val : 0.0f);
 
             pattern[i][j] = c;
         }

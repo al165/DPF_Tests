@@ -1018,6 +1018,30 @@ widgets/SimpleButton.cpp.s:
 	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-ui.dir/build.make plugins/AITest/CMakeFiles/AITest-ui.dir/widgets/SimpleButton.cpp.s
 .PHONY : widgets/SimpleButton.cpp.s
 
+widgets/XYSlider.o: widgets/XYSlider.cpp.o
+.PHONY : widgets/XYSlider.o
+
+# target to build an object file
+widgets/XYSlider.cpp.o:
+	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-ui.dir/build.make plugins/AITest/CMakeFiles/AITest-ui.dir/widgets/XYSlider.cpp.o
+.PHONY : widgets/XYSlider.cpp.o
+
+widgets/XYSlider.i: widgets/XYSlider.cpp.i
+.PHONY : widgets/XYSlider.i
+
+# target to preprocess a source file
+widgets/XYSlider.cpp.i:
+	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-ui.dir/build.make plugins/AITest/CMakeFiles/AITest-ui.dir/widgets/XYSlider.cpp.i
+.PHONY : widgets/XYSlider.cpp.i
+
+widgets/XYSlider.s: widgets/XYSlider.cpp.s
+.PHONY : widgets/XYSlider.s
+
+# target to generate assembly for a file
+widgets/XYSlider.cpp.s:
+	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-ui.dir/build.make plugins/AITest/CMakeFiles/AITest-ui.dir/widgets/XYSlider.cpp.s
+.PHONY : widgets/XYSlider.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -1129,6 +1153,9 @@ help:
 	@echo "... widgets/SimpleButton.o"
 	@echo "... widgets/SimpleButton.i"
 	@echo "... widgets/SimpleButton.s"
+	@echo "... widgets/XYSlider.o"
+	@echo "... widgets/XYSlider.i"
+	@echo "... widgets/XYSlider.s"
 .PHONY : help
 
 

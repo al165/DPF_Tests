@@ -10,6 +10,7 @@
 #include "Knob.hpp"
 #include "HBox.hpp"
 #include "BeatGrid.hpp"
+#include "XYSlider.hpp"
 
 #include "font.cpp"
 
@@ -21,7 +22,8 @@ constexpr unsigned int UI_H = 300;
 
 class AITestUI : public UI,
                  public Button::Callback,
-                 public Knob::Callback
+                 public Knob::Callback,
+                 public XYSlider::Callback
 {
 public:
     AITestUI();
@@ -35,6 +37,9 @@ protected:
     void knobDragStarted(Knob *knob) override;
     void knobDragFinished(Knob *knob, float value) override;
     void knobValueChanged(Knob *knob, float value) override;
+    void xyDragStarted(XYSlider *xySlider) override;
+    void xyDragFinished(XYSlider *xySlider, float x, float y) override;
+    void xyValueChanged(XYSlider *xySlider, float x, float y) override;
 
 
 private:
@@ -43,6 +48,7 @@ private:
     Button *fGenerate;
     Knob *fThreshold;
     BeatGrid *fBeatGrid;
+    XYSlider *fXYSlider;
 
     FontId _logo_font;
 
