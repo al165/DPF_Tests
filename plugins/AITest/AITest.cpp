@@ -10,9 +10,6 @@ AITest::AITest() : Plugin(kParameterCount, 0, 1),
     model_stream.write((char *) beat_model_test_zip, beat_model_test_zip_len);
 
     try {
-        // std::istream model_stream;
-
-        // module = torch::jit::load("/home/arran/Projects/WAIVE/03_Plugin/DPFTutorial/models/beat_model_test.zip");
         module = torch::jit::load(model_stream);
         has_model_ = true;
 
@@ -39,11 +36,6 @@ void AITest::initParameter(uint32_t index, Parameter &parameter)
             parameter.ranges.max = 1.0f;
             parameter.ranges.def = 0.7f;
             parameter.hints = kParameterIsAutomatable;
-            break;
-        case kGenerate:
-            parameter.name = "Generate New";
-            parameter.symbol = "generate_new";
-            parameter.hints = kParameterIsOutput;
             break;
         case kSixteenth:
             parameter.name = "Sixteenth";
@@ -78,12 +70,8 @@ float AITest::getParameterValue(uint32_t index) const
 
 void AITest::setParameterValue(uint32_t index, float value)
 {
-    // printf("AITest::setParameterValue: %d %.2f\n", index, value);
     switch(index)
     {
-        case kGenerate:
-            generateNew();
-            break;
         case kThreshold:
             fThreshold = value;
             updatePattern();

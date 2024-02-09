@@ -2,7 +2,6 @@
 #define AITESTPARAMS_HPP_INCLUDED
 
 enum Parameters {
-    kGenerate,
     kThreshold,
     kSixteenth,
     kParameterCount

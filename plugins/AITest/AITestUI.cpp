@@ -19,7 +19,6 @@ AITestUI::AITestUI()
     fGenerate->setLabel("generate");
     fGenerate->setSize(100, 30);
     fGenerate->setCallback(this);
-    fGenerate->setId(kGenerate);
 
     fThreshold = new Knob(hbox_controls);
     fThreshold->setId(kThreshold);
@@ -49,10 +48,7 @@ AITestUI::AITestUI()
 
 }
 
-AITestUI::~AITestUI()
-{
-
-}
+AITestUI::~AITestUI(){}
 
 void AITestUI::parameterChanged(uint32_t index, float value)
 {
@@ -113,9 +109,11 @@ void AITestUI::onNanoDisplay()
 
 void AITestUI::buttonClicked(Button *button)
 {
-    // setParameterValue(kGenerate, 1.0f);
-    plugin->generateNew();
-    repaint();
+    if(button == fGenerate)
+    {
+        plugin->generateNew();
+        repaint();
+    }
 }
 
 void AITestUI::knobDragStarted(Knob *knob){}
