@@ -1018,6 +1018,30 @@ widgets/SimpleButton.cpp.s:
 	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-ui.dir/build.make plugins/AITest/CMakeFiles/AITest-ui.dir/widgets/SimpleButton.cpp.s
 .PHONY : widgets/SimpleButton.cpp.s
 
+widgets/Slider.o: widgets/Slider.cpp.o
+.PHONY : widgets/Slider.o
+
+# target to build an object file
+widgets/Slider.cpp.o:
+	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-ui.dir/build.make plugins/AITest/CMakeFiles/AITest-ui.dir/widgets/Slider.cpp.o
+.PHONY : widgets/Slider.cpp.o
+
+widgets/Slider.i: widgets/Slider.cpp.i
+.PHONY : widgets/Slider.i
+
+# target to preprocess a source file
+widgets/Slider.cpp.i:
+	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-ui.dir/build.make plugins/AITest/CMakeFiles/AITest-ui.dir/widgets/Slider.cpp.i
+.PHONY : widgets/Slider.cpp.i
+
+widgets/Slider.s: widgets/Slider.cpp.s
+.PHONY : widgets/Slider.s
+
+# target to generate assembly for a file
+widgets/Slider.cpp.s:
+	cd /home/arran/Projects/WAIVE/03_Plugin/DPFTutorial && $(MAKE) $(MAKESILENT) -f plugins/AITest/CMakeFiles/AITest-ui.dir/build.make plugins/AITest/CMakeFiles/AITest-ui.dir/widgets/Slider.cpp.s
+.PHONY : widgets/Slider.cpp.s
+
 widgets/VSlider.o: widgets/VSlider.cpp.o
 .PHONY : widgets/VSlider.o
 
@@ -1177,6 +1201,9 @@ help:
 	@echo "... widgets/SimpleButton.o"
 	@echo "... widgets/SimpleButton.i"
 	@echo "... widgets/SimpleButton.s"
+	@echo "... widgets/Slider.o"
+	@echo "... widgets/Slider.i"
+	@echo "... widgets/Slider.s"
 	@echo "... widgets/VSlider.o"
 	@echo "... widgets/VSlider.i"
 	@echo "... widgets/VSlider.s"

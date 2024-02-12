@@ -7,6 +7,7 @@
 
 #include "AITest.hpp"
 #include "SimpleButton.hpp"
+#include "Slider.hpp"
 #include "VSlider.hpp"
 #include "HBox.hpp"
 #include "BeatGrid.hpp"
@@ -22,7 +23,7 @@ constexpr unsigned int UI_H = 280;
 
 class AITestUI : public UI,
                  public Button::Callback,
-                 public VSlider::Callback,
+                 public Slider::Callback,
                  public XYSlider::Callback
 {
 public:
@@ -34,9 +35,9 @@ protected:
     void stateChanged(const char *key, const char *value) override;
     void onNanoDisplay() override;
     void buttonClicked(Button *button) override;
-    void vSliderDragStarted(VSlider *vSlider) override;
-    void vSliderDragFinished(VSlider *vSlider, float value) override;
-    void vSliderValueChanged(VSlider *vSlider, float value) override;
+    void sliderDragStarted(Slider *slider) override;
+    void sliderDragFinished(Slider *slider, float value) override;
+    void sliderValueChanged(Slider *slider, float value) override;
     void xyDragStarted(XYSlider *xySlider) override;
     void xyDragFinished(XYSlider *xySlider, float x, float y) override;
     void xyValueChanged(XYSlider *xySlider, float x, float y) override;

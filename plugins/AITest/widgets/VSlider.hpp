@@ -3,25 +3,18 @@
 
 #include "Window.hpp"
 #include "Widget.hpp"
+#include "Slider.hpp"
 #include "NanoVG.hpp"
 #include <iostream>
 
 START_NAMESPACE_DISTRHO
 
-class VSlider : public NanoSubWidget
+class VSlider : public Slider
 {
 public:
-    class Callback {
-        public:
-            virtual ~Callback() {};
-            virtual void vSliderDragStarted(VSlider *vSlider) = 0;
-            virtual void vSliderDragFinished(VSlider *vSlider, float value) = 0;
-            virtual void vSliderValueChanged(VSlider *vSlider, float value) = 0;
-    };
-
     explicit VSlider(Widget *widget) noexcept;
 
-    void setCallback(Callback *cb);
+    void setCallback(Slider::Callback *cb);
     void setValue(float val, bool sendCallback=false) noexcept;
     float getValue() noexcept;
 
@@ -38,9 +31,7 @@ protected:
 private:
     Callback *callback;
     bool dragging_;
-    float value_, tmp_value_;
-    int mouseY_;
-    int last_mouse_y_;
+    float value_;
 
     DISTRHO_LEAK_DETECTOR(VSlider);
 };

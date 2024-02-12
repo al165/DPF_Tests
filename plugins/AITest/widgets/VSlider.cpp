@@ -6,13 +6,12 @@ using DGL_NAMESPACE::Color;
 
 
 VSlider::VSlider(Widget *parent) noexcept
-    : NanoSubWidget(parent)
+    : Slider(parent)
 {
     loadSharedResources();
 
     dragging_ = false;
     value_ = 0.0f;
-    tmp_value_ = 0.0f;
     min = 0.0f;
     max = 1.0f;
     foreground_color = Color(255, 255, 255);
@@ -30,11 +29,10 @@ void VSlider::setValue(float val, bool sendCallback) noexcept
     if(val == value_) return;
 
     value_ = std::max(min, std::min(max, val));
-    tmp_value_ = value_;
 
     if(sendCallback && callback != nullptr)
     {
-        callback->vSliderValueChanged(this, value_);
+        callback->sliderValueChanged(this, value_);
     }
 }
 
@@ -50,14 +48,14 @@ bool VSlider::onMouse(const MouseEvent &ev)
 
         if(callback != nullptr)
         {
-            callback->vSliderDragStarted(this);
+            callback->sliderDragStarted(this);
         }
         repaint();
-        return false;
     } 
     else if(dragging_)
     {
         dragging_ = false;
+        callback->sliderDragFinished(this, value_);
     }
 
     return false;
@@ -67,25 +65,23 @@ bool VSlider::onMotion(const MotionEvent &ev)
 {
     if(!isVisible()) return false;
     
-
     if(!dragging_) return false;
 
-    float d, value = 0.0f;
-    d = 200.f;
-    const int movY = last_mouse_y_ - ev.pos.getY();
-    value = tmp_value_ - (float(min - max)/d * float(movY));
+    const float height = getHeight();
 
-    if(value < min) tmp_value_ = value = min;
-    else if(value > max) tmp_value_ = value = max;
+    float y_ = 1.0 - std::clamp(ev.pos.getY() / (double)height, 0.0, 1.0);
+    float value = (max - min) * y_ + min;
 
     setValue(value, true);
-    last_mouse_y_ = ev.pos.getY();
+
+    repaint();
 
     return false;
 }
 
 bool VSlider::onScroll(const ScrollEvent &ev)
 {
+    // TODO
     return false;
 }
 
@@ -118,8 +114,6 @@ void VSlider::onNanoDisplay()
     circle(width/2.0f, (1.0f - normValue)*height, 5);
     fill();
     closePath();
-
-
 }
 
 void VSlider::setCallback(Callback *cb)

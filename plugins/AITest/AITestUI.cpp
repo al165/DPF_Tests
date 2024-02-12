@@ -15,11 +15,6 @@ AITestUI::AITestUI()
 
     hbox_controls = new HBox(this);
 
-    // fGenerate = new Button(hbox_controls);
-    // fGenerate->setLabel("generate");
-    // fGenerate->setSize(100, 30);
-    // fGenerate->setCallback(this);
-
     fBeatGrid = new BeatGrid(hbox_controls);
     fBeatGrid->setSize(Size<uint>(570, 160));
     fBeatGrid->setAbsolutePos(10, 110);
@@ -50,12 +45,10 @@ AITestUI::AITestUI()
     hbox_controls->setWidth(UI_W);
     hbox_controls->padding = 10;
     hbox_controls->justify_content = HBox::Justify_Content::left;
-    // hbox_controls->addWidget(fGenerate);
     hbox_controls->addWidget(fXYSlider);
     hbox_controls->addWidget(fBeatGrid);
     hbox_controls->addWidget(fThreshold);
     hbox_controls->positionWidgets();
-
 
     loadSharedResources();
 
@@ -68,11 +61,13 @@ AITestUI::~AITestUI(){}
 
 void AITestUI::parameterChanged(uint32_t index, float value)
 {
+    printf("parameterChanged %.2f\n", value);
+    
     switch(index)
     {   
         case kThreshold:
             fThreshold->setValue(value);
-            repaint();
+            fThreshold->repaint();
             break;
         case kSixteenth:
             fBeatGrid->sixteenth = (uint8_t)value;
@@ -87,9 +82,11 @@ void AITestUI::parameterChanged(uint32_t index, float value)
             fXYSlider->repaint();
             break;  
         default:
-            repaint();
-            break;
+            // repaint();
+            return;
     }
+
+    repaint();
 }
 
 void AITestUI::stateChanged(const char *key, const char *value)
@@ -140,13 +137,13 @@ void AITestUI::buttonClicked(Button *button)
     }
 }
 
-void AITestUI::vSliderDragStarted(VSlider *vSlider){}
+void AITestUI::sliderDragStarted(Slider *slider){}
 
-void AITestUI::vSliderDragFinished(VSlider *vSlider, float value){}
+void AITestUI::sliderDragFinished(Slider *slider, float value){}
 
-void AITestUI::vSliderValueChanged(VSlider *vSlider, float value)
+void AITestUI::sliderValueChanged(Slider *slider, float value)
 {
-    if(vSlider == fThreshold){
+    if(slider == fThreshold){
         setParameterValue(kThreshold, value);
     }
 }
@@ -157,9 +154,10 @@ void AITestUI::xyDragFinished(XYSlider *xySlider, float x, float y){}
 
 void AITestUI::xyValueChanged(XYSlider *xySlider, float x, float y)
 {
-    setParameterValue(kEmbedX, x);
-    setParameterValue(kEmbedY, y);
-    repaint();
+    if(xySlider == fXYSlider){
+        setParameterValue(kEmbedX, x);
+        setParameterValue(kEmbedY, y);
+    }
 }
 
 UI *createUI()

@@ -31,8 +31,6 @@ float XYSlider::getYValue() noexcept
 
 void XYSlider::setXValue(float x, bool sendCallback) noexcept
 {
-    if(x == value_x_) return;
-
     value_x_ = x;
 
     if(sendCallback && callback != nullptr)
@@ -43,8 +41,6 @@ void XYSlider::setXValue(float x, bool sendCallback) noexcept
 
 void XYSlider::setYValue(float y, bool sendCallback) noexcept
 {
-    if(y == value_y_) return;
-
     value_y_ = y;
 
     if(sendCallback && callback != nullptr)
@@ -85,10 +81,9 @@ bool XYSlider::onMotion(const MotionEvent &ev)
 
     if(!dragging_) return false;
 
-    // printf("pos.x: %.1f pos.y: %.1f\n", ev.pos.getX(), ev.pos.getY());
     updateXY(ev.pos);
+    repaint();
     
-
     return false;
 }
 
@@ -102,8 +97,6 @@ void XYSlider::updateXY(const DGL::Point<double> pos)
 
     float value_x = (maxX - minX) * x_ + minX;
     float value_y = (maxY - minY) * y_ + minY;
-
-    // printf("x_: %.1f, y_: %.1f, value_x: %.1f, value_y: %.1f\n", x_, y_, value_x, value_y);
 
     setXValue(value_x, false);
     setYValue(value_y, true);
@@ -132,7 +125,6 @@ void XYSlider::onNanoDisplay()
 
     beginPath();
     fillColor(marker_color);
-    // rect(x_*width - 4.0f, y_*height - 4.0f, 8.0f, 8.0f);
     circle(x_*width, y_*height, 5);
     fill();
     closePath();
@@ -141,7 +133,6 @@ void XYSlider::onNanoDisplay()
     strokeColor(fg_color);
     moveTo(0, y_*height);
     lineTo(width, y_*height);
-    // rect(0, y_*height, width, 1);
     stroke();
     closePath();
 
