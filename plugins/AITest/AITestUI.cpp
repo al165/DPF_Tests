@@ -9,8 +9,6 @@ AITestUI::AITestUI()
 {
     plugin = static_cast<AITest *>(getPluginInstancePointer());
 
-    Window &window = getWindow();
-
     _logo_font = createFontFromMemory("VG5000", VG5000_ttf, VG5000_ttf_len, false);
 
     hbox_controls = new HBox(this);
@@ -67,22 +65,21 @@ void AITestUI::parameterChanged(uint32_t index, float value)
     {   
         case kThreshold:
             fThreshold->setValue(value);
-            fThreshold->repaint();
+            // fThreshold->repaint();
             break;
         case kSixteenth:
             fBeatGrid->sixteenth = (uint8_t)value;
-            fBeatGrid->repaint();
+            // fBeatGrid->repaint();
             break;
         case kEmbedX:
             fXYSlider->setXValue(value);
-            fXYSlider->repaint();
+            // fXYSlider->repaint();
             break;
         case kEmbedY:
             fXYSlider->setYValue(value);
-            fXYSlider->repaint();
+            // fXYSlider->repaint();
             break;  
         default:
-            // repaint();
             return;
     }
 

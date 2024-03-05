@@ -18,12 +18,6 @@ public:
     };
 
     explicit Slider(Widget *widget) noexcept;
-
-// protected:
-//     void onNanoDisplay() override;
-//     bool onMouse(const MouseEvent &) override;
-//     bool onMotion(const MotionEvent &) override;
-//     bool onScroll(const ScrollEvent &) override;
 };
 
 END_NAMESPACE_DISTRHO

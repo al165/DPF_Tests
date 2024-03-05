@@ -2,7 +2,7 @@ dpf_add_plugin(
   AITest
   TARGETS 
       # jack
-      lv2 
+      lv2
       vst3
       vst2
       clap
